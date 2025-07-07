@@ -562,6 +562,59 @@ process POPPUNK_REFINE {
     echo "📁 Copying database for refinement..."
     cp -r ${db_dir} poppunk_db_refined
     
+    # CRITICAL FIX: Ensure the fitted model file has the correct name for refinement
+    echo "🔧 Ensuring fitted model file has correct name for refinement..."
+    
+    # PopPUNK refinement expects the fitted model to be named after the database directory
+    if [ -f "poppunk_db_refined/poppunk_db_fit.pkl" ] && [ ! -f "poppunk_db_refined/poppunk_db_refined_fit.pkl" ]; then
+        cp "poppunk_db_refined/poppunk_db_fit.pkl" "poppunk_db_refined/poppunk_db_refined_fit.pkl"
+        echo "✓ Created poppunk_db_refined_fit.pkl from poppunk_db_fit.pkl"
+    fi
+    
+    if [ -f "poppunk_db_refined/poppunk_fit_fit.pkl" ] && [ ! -f "poppunk_db_refined/poppunk_db_refined_fit.pkl" ]; then
+        cp "poppunk_db_refined/poppunk_fit_fit.pkl" "poppunk_db_refined/poppunk_db_refined_fit.pkl"
+        echo "✓ Created poppunk_db_refined_fit.pkl from poppunk_fit_fit.pkl"
+    fi
+    
+    # Also ensure the .npz file has the correct name
+    if [ -f "poppunk_db_refined/poppunk_db_fit.npz" ] && [ ! -f "poppunk_db_refined/poppunk_db_refined_fit.npz" ]; then
+        cp "poppunk_db_refined/poppunk_db_fit.npz" "poppunk_db_refined/poppunk_db_refined_fit.npz"
+        echo "✓ Created poppunk_db_refined_fit.npz from poppunk_db_fit.npz"
+    fi
+    
+    if [ -f "poppunk_db_refined/poppunk_fit_fit.npz" ] && [ ! -f "poppunk_db_refined/poppunk_db_refined_fit.npz" ]; then
+        cp "poppunk_db_refined/poppunk_fit_fit.npz" "poppunk_db_refined/poppunk_db_refined_fit.npz"
+        echo "✓ Created poppunk_db_refined_fit.npz from poppunk_fit_fit.npz"
+    fi
+    
+    # Verify the critical files exist before attempting refinement
+    echo "🔍 Verifying database files before refinement..."
+    if [ -f "poppunk_db_refined/poppunk_db_refined_fit.pkl" ]; then
+        echo "✅ Found fitted model: poppunk_db_refined_fit.pkl"
+    else
+        echo "❌ Missing fitted model file. Available .pkl files:"
+        ls -la poppunk_db_refined/*.pkl 2>/dev/null || echo "No .pkl files found"
+        
+        # Try to find any _fit.pkl file and create the expected name
+        echo "🔧 Attempting to find and rename any available fitted model..."
+        for pkl_file in poppunk_db_refined/*_fit.pkl; do
+            if [ -f "\$pkl_file" ]; then
+                cp "\$pkl_file" "poppunk_db_refined/poppunk_db_refined_fit.pkl"
+                echo "✓ Created poppunk_db_refined_fit.pkl from \$(basename \$pkl_file)"
+                break
+            fi
+        done
+        
+        # Do the same for .npz files
+        for npz_file in poppunk_db_refined/*_fit.npz; do
+            if [ -f "\$npz_file" ]; then
+                cp "\$npz_file" "poppunk_db_refined/poppunk_db_refined_fit.npz"
+                echo "✓ Created poppunk_db_refined_fit.npz from \$(basename \$npz_file)"
+                break
+            fi
+        done
+    fi
+    
     # Determine which model type was used for appropriate refinement strategy
     model_type="unknown"
     if [ -f "poppunk_db_refined/poppunk_fit_fit.pkl" ] || [ -f "poppunk_db_refined/poppunk_db_fit.pkl" ]; then
@@ -604,18 +657,13 @@ process POPPUNK_REFINE {
         
         if poppunk --fit-model refine \\
             --ref-db poppunk_db_refined \\
-            --output poppunk_refined_attempt1 \\
+            --output poppunk_db_refined \\
             --threads \$refine_threads \\
             \$refine_type; then
             
             echo "✅ Model refinement completed successfully"
             refinement_success=true
-            
-            # Copy refined results back to database
-            if [ -d "poppunk_refined_attempt1" ]; then
-                cp poppunk_refined_attempt1/* poppunk_db_refined/ 2>/dev/null || echo "Some refinement files could not be copied"
-                echo "📁 Refined model files copied to database"
-            fi
+            echo "📁 Refinement completed in-place - no file copying needed"
             
         else
             echo "⚠️  Standard refinement failed, trying conservative approach..."
@@ -630,17 +678,12 @@ process POPPUNK_REFINE {
         echo "🔄 Attempt 2: Conservative refinement (single-threaded)..."
         if poppunk --fit-model refine \\
             --ref-db poppunk_db_refined \\
-            --output poppunk_refined_attempt2 \\
+            --output poppunk_db_refined \\
             --threads 1; then
             
             echo "✅ Conservative model refinement completed"
             refinement_success=true
-            
-            # Copy refined results back to database
-            if [ -d "poppunk_refined_attempt2" ]; then
-                cp poppunk_refined_attempt2/* poppunk_db_refined/ 2>/dev/null || echo "Some refinement files could not be copied"
-                echo "📁 Conservative refined model files copied to database"
-            fi
+            echo "📁 Conservative refinement completed in-place - no file copying needed"
             
         else
             echo "⚠️  Conservative refinement failed, trying minimal approach..."
@@ -683,6 +726,31 @@ Refinement Benefits for B. pseudomallei:
 Note: If refinement failed, the original fitted model is still functional
 but may not optimally handle B. pseudomallei's recombination patterns.
 EOF
+    
+    # Final verification and status report
+    if [ "$refinement_success" = true ]; then
+        echo "🎉 PopPUNK model refinement process completed!"
+        echo "📊 Refined model ready for clustering analysis"
+        
+        # Verify the refined model files exist with correct names
+        echo "🔍 Final verification of refined model files..."
+        if [ -f "poppunk_db_refined/poppunk_db_refined_fit.pkl" ]; then
+            echo "✅ Refined fitted model confirmed: poppunk_db_refined_fit.pkl"
+        else
+            echo "⚠️  Warning: Expected refined fitted model not found, checking alternatives..."
+            # Try to find and rename any available fitted model
+            for pkl_file in poppunk_db_refined/*_fit.pkl; do
+                if [ -f "$pkl_file" ]; then
+                    cp "$pkl_file" "poppunk_db_refined/poppunk_db_refined_fit.pkl"
+                    echo "✓ Created poppunk_db_refined_fit.pkl from $(basename $pkl_file)"
+                    break
+                fi
+            done
+        fi
+    else
+        echo "⚠️  Model refinement failed - proceeding with original model"
+        echo "📊 Using original model for clustering analysis"
+    fi
     
     # Verify refined database integrity and copy missing critical files
     echo "🔍 Verifying refined database integrity..."
