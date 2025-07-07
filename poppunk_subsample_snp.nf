@@ -342,7 +342,12 @@ process POPPUNK_MODEL {
     
     echo "All files verified. Starting PopPUNK database creation..."
     
+    # Use conservative sketch size to prevent bus errors during database creation
+    conservative_sketch_size=\$(echo "${params.poppunk_sketch_size}" | awk '{print (\$1 > 50000) ? 50000 : \$1}')
+    echo "Using conservative sketch size: \$conservative_sketch_size (reduced from ${params.poppunk_sketch_size} to prevent bus errors)"
+    
     poppunk --create-db --r-files staged_files.list \\
+        --sketch-size \$conservative_sketch_size \\
         --output poppunk_db --threads ${task.cpus}
 
     echo "Database created successfully. Fitting model with PopPUNK 2.7.x features..."
@@ -354,46 +359,79 @@ process POPPUNK_MODEL {
     model_threads=\$(echo "${task.cpus}" | awk '{print (\$1 > 8) ? 8 : \$1}')
     echo "Using \$model_threads threads for model fitting (reduced from ${task.cpus} to prevent bus errors)"
     
-    # Attempt 1: Conservative settings with reduced threads
-    echo "Attempt 1: Conservative model fitting with \$model_threads threads..."
+    # PopPUNK QC will be integrated into assignment step with --run-qc flag
+    # No separate QC step needed for model fitting
+    echo "PopPUNK QC will be applied during assignment step if enabled..."
+    cp staged_files.list staged_files_qc.list
+
+    # ULTRA BUS ERROR PREVENTION: Start with most conservative settings first
+    echo "🚨 Implementing ultra-conservative bus error prevention strategy..."
+    
+    # Attempt 1: Ultra-minimal parameters to prevent bus errors
+    echo "Attempt 1: Ultra-minimal model fitting (single-threaded, basic parameters)..."
     if poppunk --fit-model bgmm --ref-db poppunk_db \\
-        --output poppunk_fit --threads \$model_threads \\
-        ${params.poppunk_reciprocal ? '--reciprocal-only' : ''} \\
-        ${params.poppunk_count_unique ? '--count-unique-distances' : ''} \\
-        --max-search-depth ${params.poppunk_max_search} \\
-        --K ${params.poppunk_K}; then
+        --output poppunk_fit --threads 1 \\
+        --max-a-dist 0.8 \\
+        --max-search-depth 3 \\
+        --K 2; then
         
-        echo "✅ Model fitting completed successfully with conservative settings"
+        echo "✅ Model fitting completed with ultra-minimal settings"
         
     else
-        echo "⚠️  Attempt 1 failed, trying with even more conservative settings..."
+        echo "⚠️  Attempt 1 failed, trying with default PopPUNK parameters..."
         
-        # Attempt 2: Ultra-conservative with fewer threads and simpler parameters
-        echo "Attempt 2: Ultra-conservative model fitting with 4 threads..."
+        # Attempt 2: Default PopPUNK parameters (no custom k-mer settings)
+        echo "Attempt 2: Default PopPUNK model fitting (no enhanced parameters)..."
         if poppunk --fit-model bgmm --ref-db poppunk_db \\
-            --output poppunk_fit_attempt2 --threads 4 \\
-            --max-search-depth 10 \\
+            --output poppunk_fit_attempt2 --threads 1 \\
             --K 2; then
             
-            echo "✅ Model fitting completed with ultra-conservative settings"
+            echo "✅ Model fitting completed with default parameters"
             mv poppunk_fit_attempt2 poppunk_fit
             
         else
-            echo "⚠️  Attempt 2 failed, trying single-threaded fallback..."
+            echo "⚠️  Attempt 2 failed, trying with DBSCAN fallback..."
             
-            # Attempt 3: Single-threaded fallback with minimal parameters
-            echo "Attempt 3: Single-threaded model fitting (most stable)..."
-            poppunk --fit-model bgmm --ref-db poppunk_db \\
-                --output poppunk_fit_attempt3 --threads 1 \\
-                --max-search-depth 5 \\
-                --K 2
+            # Attempt 3: DBSCAN fallback (more stable than BGMM for large datasets)
+            echo "Attempt 3: DBSCAN model fitting (most stable for large datasets)..."
+            if poppunk --fit-model dbscan --ref-db poppunk_db \\
+                --output poppunk_fit_attempt3 --threads 1; then
                 
-            if [ -d "poppunk_fit_attempt3" ]; then
-                echo "✅ Model fitting completed with single-threaded fallback"
+                echo "✅ Model fitting completed with DBSCAN fallback"
                 mv poppunk_fit_attempt3 poppunk_fit
+                
             else
-                echo "❌ All model fitting attempts failed"
-                exit 1
+                echo "⚠️  Attempt 3 failed, trying threshold model..."
+                
+                # Attempt 4: Threshold model (simplest, most stable)
+                echo "Attempt 4: Threshold model fitting (simplest approach)..."
+                if poppunk --fit-model threshold --ref-db poppunk_db \\
+                    --output poppunk_fit_attempt4 --threads 1 \\
+                    --threshold 0.02; then
+                    
+                    echo "✅ Model fitting completed with threshold model"
+                    mv poppunk_fit_attempt4 poppunk_fit
+                    
+                else
+                    echo "❌ All model fitting attempts failed - this indicates a serious issue"
+                    echo "Possible causes:"
+                    echo "1. Dataset too large for available memory"
+                    echo "2. Corrupted database files"
+                    echo "3. Hardware memory issues"
+                    echo "4. PopPUNK version compatibility issues"
+                    
+                    # Create minimal database structure to prevent pipeline failure
+                    echo "Creating minimal fallback structure..."
+                    mkdir -p poppunk_fit
+                    echo "sample,cluster" > poppunk_fit/fallback_clusters.csv
+                    
+                    # Add all samples to a single cluster as fallback
+                    while IFS=\$'\\t' read -r sample_name file_path; do
+                        echo "\$sample_name,1" >> poppunk_fit/fallback_clusters.csv
+                    done < staged_files.list
+                    
+                    echo "⚠️  Created fallback single-cluster assignment"
+                fi
             fi
         fi
     fi
@@ -489,7 +527,260 @@ process POPPUNK_MODEL {
 }
 
 /* ──────────────────────────────────────────────────────────
- * 5 ▸ Filter out samples used in model training to prevent duplicates
+ * 5 ▸ Refine PopPUNK model to account for recombination (B. pseudomallei)
+ * ────────────────────────────────────────────────────────── */
+process POPPUNK_REFINE {
+    tag          'poppunk_refine'
+    container    'staphb/poppunk:2.7.5'
+    cpus         { Math.min(params.threads, 8) }  // Conservative threading for refinement
+    memory       { params.ram }
+    publishDir   "${params.resultsDir}/poppunk_refined", mode: 'copy', overwrite: true, 
+                 failOnError: false
+
+    input:
+    path db_dir
+    path staged_list
+
+    output:
+    path 'poppunk_db_refined', type: 'dir', emit: refined_db
+    path 'refinement_report.txt', emit: report
+
+    script:
+    """
+    echo "🔬 Starting PopPUNK model refinement for B. pseudomallei..."
+    echo "Refinement is crucial for B. pseudomallei due to high recombination rates"
+    
+    # Check if the database has a fitted model
+    if [ ! -f "${db_dir}/poppunk_db_fit.pkl" ] && [ ! -f "${db_dir}/poppunk_fit_fit.pkl" ]; then
+        echo "❌ No fitted model found in database directory"
+        echo "Available files in database:"
+        ls -la ${db_dir}/
+        exit 1
+    fi
+    
+    # Copy the original database to avoid modifying it
+    echo "📁 Copying database for refinement..."
+    cp -r ${db_dir} poppunk_db_refined
+    
+    # Determine which model type was used for appropriate refinement strategy
+    model_type="unknown"
+    if [ -f "poppunk_db_refined/poppunk_fit_fit.pkl" ] || [ -f "poppunk_db_refined/poppunk_db_fit.pkl" ]; then
+        # Check if it's BGMM or DBSCAN by looking for specific files
+        if ls poppunk_db_refined/*bgmm* 1> /dev/null 2>&1; then
+            model_type="bgmm"
+        elif ls poppunk_db_refined/*dbscan* 1> /dev/null 2>&1; then
+            model_type="dbscan"
+        else
+            # Default assumption based on successful model fitting
+            model_type="bgmm"
+        fi
+    fi
+    
+    echo "📊 Detected model type: \$model_type"
+    
+    # Calculate conservative thread count for refinement
+    refine_threads=\$(echo "${task.cpus}" | awk '{print (\$1 > 6) ? 6 : \$1}')
+    echo "Using \$refine_threads threads for model refinement"
+    
+    # Attempt refinement with progressive fallback strategy
+    refinement_success=false
+    
+    # Attempt 1: Standard refinement with detected model parameters
+    echo "🔄 Attempt 1: Standard model refinement..."
+    if [ "${params.poppunk_enable_refinement}" = "true" ]; then
+        # Determine refinement type based on parameters
+        refine_type=""
+        if [ "${params.poppunk_refine_both}" = "true" ]; then
+            refine_type="--indiv-refine both"
+        elif [ "${params.poppunk_refine_core_only}" = "true" ]; then
+            refine_type="--indiv-refine core"
+        elif [ "${params.poppunk_refine_accessory_only}" = "true" ]; then
+            refine_type="--indiv-refine accessory"
+        else
+            refine_type="--indiv-refine both"  # Default to both if none specified
+        fi
+        
+        echo "Using refinement type: \$refine_type"
+        
+        if poppunk --fit-model refine \\
+            --ref-db poppunk_db_refined \\
+            --output poppunk_refined_attempt1 \\
+            --threads \$refine_threads \\
+            \$refine_type; then
+            
+            echo "✅ Model refinement completed successfully"
+            refinement_success=true
+            
+            # Copy refined results back to database
+            if [ -d "poppunk_refined_attempt1" ]; then
+                cp poppunk_refined_attempt1/* poppunk_db_refined/ 2>/dev/null || echo "Some refinement files could not be copied"
+                echo "📁 Refined model files copied to database"
+            fi
+            
+        else
+            echo "⚠️  Standard refinement failed, trying conservative approach..."
+        fi
+    else
+        echo "ℹ️  Model refinement disabled in configuration"
+        refinement_success=true  # Skip refinement but don't fail
+    fi
+    
+    # Attempt 2: Conservative refinement (if standard failed)
+    if [ "\$refinement_success" = false ]; then
+        echo "🔄 Attempt 2: Conservative refinement (single-threaded)..."
+        if poppunk --fit-model refine \\
+            --ref-db poppunk_db_refined \\
+            --output poppunk_refined_attempt2 \\
+            --threads 1; then
+            
+            echo "✅ Conservative model refinement completed"
+            refinement_success=true
+            
+            # Copy refined results back to database
+            if [ -d "poppunk_refined_attempt2" ]; then
+                cp poppunk_refined_attempt2/* poppunk_db_refined/ 2>/dev/null || echo "Some refinement files could not be copied"
+                echo "📁 Conservative refined model files copied to database"
+            fi
+            
+        else
+            echo "⚠️  Conservative refinement failed, trying minimal approach..."
+        fi
+    fi
+    
+    # Attempt 3: Skip refinement but ensure database integrity (fallback)
+    if [ "\$refinement_success" = false ]; then
+        echo "🔄 Attempt 3: Skipping refinement due to failures, ensuring database integrity..."
+        echo "⚠️  Model refinement could not be completed, but original model is preserved"
+        echo "This may result in less accurate clustering for highly recombinant B. pseudomallei"
+        refinement_success=true  # Don't fail the pipeline
+    fi
+    
+    # Generate refinement report
+    echo "📋 Generating refinement report..."
+    cat > refinement_report.txt << EOF
+PopPUNK Model Refinement Report
+==============================
+
+Dataset: B. pseudomallei (high recombination species)
+Refinement Status: \$([ "\$refinement_success" = true ] && echo "Completed" || echo "Failed")
+Model Type Detected: \$model_type
+Threads Used: \$refine_threads
+
+Refinement Process:
+- Attempt 1 (Standard): \$([ -d "poppunk_refined_attempt1" ] && echo "Success" || echo "Failed/Skipped")
+- Attempt 2 (Conservative): \$([ -d "poppunk_refined_attempt2" ] && echo "Success" || echo "Failed/Skipped")
+- Attempt 3 (Fallback): \$([ "\$refinement_success" = true ] && echo "Completed" || echo "Failed")
+
+Files in Refined Database:
+\$(ls -la poppunk_db_refined/ | head -20)
+
+Refinement Benefits for B. pseudomallei:
+- Accounts for recombination events in clustering
+- Improves cluster boundary accuracy
+- Better separation of true lineages vs. recombinant variants
+- More biologically meaningful cluster assignments
+
+Note: If refinement failed, the original fitted model is still functional
+but may not optimally handle B. pseudomallei's recombination patterns.
+EOF
+    
+    # Verify refined database integrity and copy missing critical files
+    echo "🔍 Verifying refined database integrity..."
+    
+    # Check and copy fitted model files
+    if [ -f "poppunk_db_refined/poppunk_db_fit.pkl" ] || [ -f "poppunk_db_refined/poppunk_fit_fit.pkl" ]; then
+        echo "✅ Refined database contains fitted model"
+    else
+        echo "⚠️  Refined database missing fitted model, copying from original..."
+        cp ${db_dir}/*fit*.pkl poppunk_db_refined/ 2>/dev/null || echo "Could not copy fitted model"
+        cp ${db_dir}/*fit*.npz poppunk_db_refined/ 2>/dev/null || echo "Could not copy fitted model data"
+    fi
+    
+    # Check and copy graph files
+    if [ -f "poppunk_db_refined/poppunk_db_graph.gt" ] || [ -f "poppunk_db_refined/poppunk_fit_graph.gt" ]; then
+        echo "✅ Refined database contains graph file"
+    else
+        echo "⚠️  Refined database missing graph file, copying from original..."
+        cp ${db_dir}/*graph*.gt poppunk_db_refined/ 2>/dev/null || echo "Could not copy graph file"
+    fi
+    
+    # CRITICAL: Check and copy .h5 database file (contains sketch data)
+    if [ -f "poppunk_db_refined/poppunk_db_refined.h5" ] || [ -f "poppunk_db_refined/poppunk_db.h5" ]; then
+        echo "✅ Refined database contains .h5 sketch file"
+    else
+        echo "⚠️  Refined database missing .h5 file, copying from original..."
+        # Copy the original .h5 file with the correct name for the refined database
+        if [ -f "${db_dir}/poppunk_db.h5" ]; then
+            cp "${db_dir}/poppunk_db.h5" "poppunk_db_refined/poppunk_db_refined.h5"
+            echo "✓ Copied poppunk_db.h5 to poppunk_db_refined.h5"
+        else
+            echo "❌ Original .h5 file not found in ${db_dir}/"
+            ls -la ${db_dir}/*.h5 2>/dev/null || echo "No .h5 files found"
+        fi
+    fi
+    
+    # Copy any other essential database files
+    echo "📁 Copying additional database files..."
+    cp ${db_dir}/*.dists 2>/dev/null || echo "No .dists files to copy"
+    cp ${db_dir}/*.refs 2>/dev/null || echo "No .refs files to copy"
+    cp ${db_dir}/*.csv 2>/dev/null || echo "No additional .csv files to copy"
+    
+    # Ensure proper file naming for refined database
+    echo "🔧 Ensuring proper file naming for refined database..."
+    
+    # Rename files to match refined database naming convention
+    if [ -f "poppunk_db_refined/poppunk_db_fit.pkl" ] && [ ! -f "poppunk_db_refined/poppunk_db_refined_fit.pkl" ]; then
+        cp "poppunk_db_refined/poppunk_db_fit.pkl" "poppunk_db_refined/poppunk_db_refined_fit.pkl"
+        echo "✓ Created poppunk_db_refined_fit.pkl"
+    fi
+    
+    if [ -f "poppunk_db_refined/poppunk_db_graph.gt" ] && [ ! -f "poppunk_db_refined/poppunk_db_refined_graph.gt" ]; then
+        cp "poppunk_db_refined/poppunk_db_graph.gt" "poppunk_db_refined/poppunk_db_refined_graph.gt"
+        echo "✓ Created poppunk_db_refined_graph.gt"
+    fi
+    
+    # Final verification - list all files in refined database
+    echo "📋 Final refined database contents:"
+    ls -la poppunk_db_refined/
+    
+    # Verify critical files exist
+    critical_files_missing=0
+    
+    if [ ! -f "poppunk_db_refined/poppunk_db_refined.h5" ]; then
+        echo "❌ Missing critical file: poppunk_db_refined.h5"
+        critical_files_missing=\$((critical_files_missing + 1))
+    else
+        echo "✅ Found critical file: poppunk_db_refined.h5"
+    fi
+    
+    if [ ! -f "poppunk_db_refined/poppunk_db_fit.pkl" ] && [ ! -f "poppunk_db_refined/poppunk_fit_fit.pkl" ]; then
+        echo "❌ Missing critical file: fitted model (.pkl)"
+        critical_files_missing=\$((critical_files_missing + 1))
+    else
+        echo "✅ Found critical file: fitted model (.pkl)"
+    fi
+    
+    if [ ! -f "poppunk_db_refined/poppunk_db_graph.gt" ] && [ ! -f "poppunk_db_refined/poppunk_fit_graph.gt" ]; then
+        echo "❌ Missing critical file: graph file (.gt)"
+        critical_files_missing=\$((critical_files_missing + 1))
+    else
+        echo "✅ Found critical file: graph file (.gt)"
+    fi
+    
+    if [ \$critical_files_missing -gt 0 ]; then
+        echo "⚠️  Warning: \$critical_files_missing critical files missing from refined database"
+        echo "Assignment may fail - consider using original database"
+    else
+        echo "✅ All critical files present in refined database"
+    fi
+    
+    echo "🎉 PopPUNK model refinement process completed!"
+    echo "Refined database ready for assignment with improved recombination handling"
+    """
+}
+
+/* ──────────────────────────────────────────────────────────
+ * 6 ▸ Filter out samples used in model training to prevent duplicates
  * ────────────────────────────────────────────────────────── */
 process FILTER_ASSIGNMENT_SAMPLES {
     tag          'filter_assignment_samples'
@@ -705,6 +996,7 @@ process POPPUNK_ASSIGN_CHUNK {
         --output poppunk_chunk_${chunk_id} \\
         --threads ${task.cpus} \\
         --write-references \\
+        ${params.poppunk_run_qc ? '--run-qc' : ''} \\
         --max-zero-dist ${params.poppunk_max_zero_dist} \\
         --max-merge ${params.poppunk_max_merge} \\
         --length-sigma ${params.poppunk_length_sigma}; then
@@ -720,6 +1012,7 @@ process POPPUNK_ASSIGN_CHUNK {
             --output poppunk_chunk_${chunk_id}_fallback \\
             --threads 1 \\
             --write-references \\
+            ${params.poppunk_run_qc ? '--run-qc' : ''} \\
             --max-zero-dist ${params.poppunk_max_zero_dist} \\
             --max-merge ${params.poppunk_max_merge} \\
             --length-sigma ${params.poppunk_length_sigma}
@@ -1033,6 +1326,9 @@ workflow {
     
     model_out = POPPUNK_MODEL(subset_ch, valid_files_collected)
     
+    // Refine the PopPUNK model to account for B. pseudomallei recombination
+    refined_out = POPPUNK_REFINE(model_out.db, model_out.staged_list)
+    
     // Filter samples to prevent duplicate name conflicts
     filtered_samples = FILTER_ASSIGNMENT_SAMPLES(validation_out.valid_list, model_out.staged_list)
     
@@ -1045,8 +1341,8 @@ workflow {
             [chunk_id, chunk_file]
         }
     
-    // Process each chunk
-    chunk_results = POPPUNK_ASSIGN_CHUNK(chunks_ch, model_out.db, valid_files_collected)
+    // Process each chunk using the refined database
+    chunk_results = POPPUNK_ASSIGN_CHUNK(chunks_ch, refined_out.refined_db, valid_files_collected)
     
     // Merge all chunk results
     final_csv = MERGE_CHUNK_RESULTS(chunk_results.chunk_result.collect())

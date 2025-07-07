@@ -1,17 +1,608 @@
-Jul-07 11:22:26.208 [main] DEBUG nextflow.cli.Launcher - $> nextflow run poppunk_subsample_snp.nf -profile local --input /home/phemarajata/Downloads/bp-megamix/ --resultsDir /home/phemarajata/Downloads/bp-megamix/all_samples_results
-Jul-07 11:22:26.245 [main] DEBUG nextflow.cli.CmdRun - N E X T F L O W  ~  version 25.04.4
-Jul-07 11:22:26.259 [main] DEBUG nextflow.plugin.PluginsFacade - Setting up plugin manager > mode=prod; embedded=false; plugins-dir=/home/phemarajata/.nextflow/plugins; core-plugins: nf-amazon@2.15.0,nf-azure@1.16.0,nf-cloudcache@0.4.3,nf-codecommit@0.2.3,nf-console@1.2.1,nf-google@1.21.0,nf-k8s@1.0.0,nf-tower@1.11.3,nf-wave@1.12.1
-Jul-07 11:22:26.273 [main] INFO  o.pf4j.DefaultPluginStatusProvider - Enabled plugins: []
-Jul-07 11:22:26.274 [main] INFO  o.pf4j.DefaultPluginStatusProvider - Disabled plugins: []
-Jul-07 11:22:26.276 [main] INFO  org.pf4j.DefaultPluginManager - PF4J version 3.12.0 in 'deployment' mode
-Jul-07 11:22:26.287 [main] INFO  org.pf4j.AbstractPluginManager - No plugins
-Jul-07 11:22:26.302 [main] DEBUG nextflow.config.ConfigBuilder - Found config local: /home/phemarajata/Downloads/localpoppunk-final-fixed/nextflow.config
-Jul-07 11:22:26.304 [main] DEBUG nextflow.config.ConfigBuilder - Parsing config file: /home/phemarajata/Downloads/localpoppunk-final-fixed/nextflow.config
-Jul-07 11:22:26.323 [main] DEBUG n.secret.LocalSecretsProvider - Secrets store: /home/phemarajata/.nextflow/secrets/store.json
-Jul-07 11:22:26.325 [main] DEBUG nextflow.secret.SecretsLoader - Discovered secrets providers: [nextflow.secret.LocalSecretsProvider@456be73c] - activable => nextflow.secret.LocalSecretsProvider@456be73c
-Jul-07 11:22:26.334 [main] DEBUG nextflow.config.ConfigBuilder - Applying config profile: `local`
-Jul-07 11:22:26.680 [main] DEBUG nextflow.config.ConfigBuilder - Available config profiles: [local]
-Jul-07 11:22:26.716 [main] DEBUG nextflow.cli.CmdRun - Applied DSL=2 from script declaration
-Jul-07 11:22:26.737 [main] DEBUG nextflow.cli.CmdRun - Launching `poppunk_subsample_snp.nf` [special_shockley] DSL2 - revision: 25c4cef3f0
-Jul-07 11:22:26.739 [main] DEBUG nextflow.plugin.PluginsFacade - Plugins default=[]
-Jul-07 11:22:26.740 [main] DEBUG nextflow.plugin.PluginsFacade - Plugins resolved requirement=[]
+Jul-07 15:52:56.391 [main] DEBUG nextflow.cli.Launcher - $> nextflow run poppunk_subsample_snp.nf -profile large_dataset_optimized --input /home/phemarajata/Downloads/bp_bigset/ --resultsDir /home/phemarajata/Downloads/bp_bigset/refined_samples_results
+Jul-07 15:52:56.454 [main] DEBUG nextflow.cli.CmdRun - N E X T F L O W  ~  version 25.04.4
+Jul-07 15:52:56.473 [main] DEBUG nextflow.plugin.PluginsFacade - Setting up plugin manager > mode=prod; embedded=false; plugins-dir=/home/phemarajata/.nextflow/plugins; core-plugins: nf-amazon@2.15.0,nf-azure@1.16.0,nf-cloudcache@0.4.3,nf-codecommit@0.2.3,nf-console@1.2.1,nf-google@1.21.0,nf-k8s@1.0.0,nf-tower@1.11.3,nf-wave@1.12.1
+Jul-07 15:52:56.488 [main] INFO  o.pf4j.DefaultPluginStatusProvider - Enabled plugins: []
+Jul-07 15:52:56.489 [main] INFO  o.pf4j.DefaultPluginStatusProvider - Disabled plugins: []
+Jul-07 15:52:56.491 [main] INFO  org.pf4j.DefaultPluginManager - PF4J version 3.12.0 in 'deployment' mode
+Jul-07 15:52:56.505 [main] INFO  org.pf4j.AbstractPluginManager - No plugins
+Jul-07 15:52:56.529 [main] DEBUG nextflow.config.ConfigBuilder - Found config local: /home/phemarajata/Downloads/localpoppunk-final-fixed/nextflow.config
+Jul-07 15:52:56.533 [main] DEBUG nextflow.config.ConfigBuilder - Parsing config file: /home/phemarajata/Downloads/localpoppunk-final-fixed/nextflow.config
+Jul-07 15:52:56.563 [main] DEBUG n.secret.LocalSecretsProvider - Secrets store: /home/phemarajata/.nextflow/secrets/store.json
+Jul-07 15:52:56.565 [main] DEBUG nextflow.secret.SecretsLoader - Discovered secrets providers: [nextflow.secret.LocalSecretsProvider@2160e52a] - activable => nextflow.secret.LocalSecretsProvider@2160e52a
+Jul-07 15:52:56.574 [main] DEBUG nextflow.config.ConfigBuilder - Applying config profile: `large_dataset_optimized`
+Jul-07 15:52:57.149 [main] DEBUG nextflow.config.ConfigBuilder - Available config profiles: [bus_error_prevention, large_dataset_optimized, ultra_bus_error_prevention, local]
+Jul-07 15:52:57.178 [main] DEBUG nextflow.cli.CmdRun - Applied DSL=2 from script declaration
+Jul-07 15:52:57.194 [main] DEBUG nextflow.cli.CmdRun - Launching `poppunk_subsample_snp.nf` [tender_jennings] DSL2 - revision: 444da457d1
+Jul-07 15:52:57.195 [main] DEBUG nextflow.plugin.PluginsFacade - Plugins default=[]
+Jul-07 15:52:57.195 [main] DEBUG nextflow.plugin.PluginsFacade - Plugins resolved requirement=[]
+Jul-07 15:52:57.230 [main] DEBUG nextflow.Session - Session UUID: ecaf1b66-9352-4fa4-a1cc-4df448cd9ddc
+Jul-07 15:52:57.230 [main] DEBUG nextflow.Session - Run name: tender_jennings
+Jul-07 15:52:57.230 [main] DEBUG nextflow.Session - Executor pool size: 22
+Jul-07 15:52:57.236 [main] DEBUG nextflow.file.FilePorter - File porter settings maxRetries=3; maxTransfers=50; pollTimeout=null
+Jul-07 15:52:57.240 [main] DEBUG nextflow.util.ThreadPoolBuilder - Creating thread pool 'FileTransfer' minSize=10; maxSize=66; workQueue=LinkedBlockingQueue[-1]; allowCoreThreadTimeout=false
+Jul-07 15:52:57.253 [main] DEBUG nextflow.cli.CmdRun - 
+  Version: 25.04.4 build 5950
+  Created: 16-06-2025 14:23 UTC (21:23 ICST)
+  System: Linux 6.11.0-29-generic
+  Runtime: Groovy 4.0.26 on Java HotSpot(TM) 64-Bit Server VM 17.0.12+8-LTS-286
+  Encoding: UTF-8 (UTF-8)
+  Process: 3801806@phemarajata-Stealth-16-MercedesAMG-A1VGG [127.0.1.1]
+  CPUs: 22 - Mem: 62.3 GB (4.1 GB) - Swap: 8 GB (7.3 GB)
+Jul-07 15:52:57.273 [main] DEBUG nextflow.Session - Work-dir: /home/phemarajata/Downloads/localpoppunk-final-fixed/work [ext2/ext3]
+Jul-07 15:52:57.274 [main] DEBUG nextflow.Session - Script base path does not exist or is not a directory: /home/phemarajata/Downloads/localpoppunk-final-fixed/bin
+Jul-07 15:52:57.281 [main] DEBUG nextflow.executor.ExecutorFactory - Extension executors providers=[]
+Jul-07 15:52:57.287 [main] DEBUG nextflow.Session - Observer factory: DefaultObserverFactory
+Jul-07 15:52:57.304 [main] DEBUG nextflow.Session - Observer factory (v2): LinObserverFactory
+Jul-07 15:52:57.324 [main] DEBUG nextflow.cache.CacheFactory - Using Nextflow cache factory: nextflow.cache.DefaultCacheFactory
+Jul-07 15:52:57.332 [main] DEBUG nextflow.util.CustomThreadPool - Creating default thread pool > poolSize: 23; maxThreads: 1000
+Jul-07 15:52:57.372 [main] DEBUG nextflow.Session - Session start
+Jul-07 15:52:58.027 [main] DEBUG nextflow.script.ScriptRunner - > Launching execution
+Jul-07 15:52:58.032 [main] INFO  nextflow.script.BaseScript - ▶ FASTA input directory:  /home/phemarajata/Downloads/bp_bigset/
+Jul-07 15:52:58.034 [main] INFO  nextflow.script.BaseScript - ▶ Results directory:      /home/phemarajata/Downloads/bp_bigset/refined_samples_results
+Jul-07 15:52:58.034 [main] INFO  nextflow.script.BaseScript - ▶ Threads / RAM:          16  /  200 GB
+Jul-07 15:52:58.214 [main] DEBUG nextflow.executor.ExecutorFactory - << taskConfig executor: local
+Jul-07 15:52:58.214 [main] DEBUG nextflow.executor.ExecutorFactory - >> processorType: 'local'
+Jul-07 15:52:58.219 [main] DEBUG nextflow.executor.Executor - [warm up] executor > local
+Jul-07 15:52:58.224 [main] DEBUG n.processor.LocalPollingMonitor - Creating local task monitor for executor 'local' > cpus=22; memory=62.3 GB; capacity=22; pollInterval=100ms; dumpInterval=5m
+Jul-07 15:52:58.226 [main] DEBUG n.processor.TaskPollingMonitor - >>> barrier register (monitor: local)
+Jul-07 15:52:58.246 [main] DEBUG nextflow.processor.TaskProcessor - Creating process 'VALIDATE_FASTA': maxForks=0; fair=false; array=0
+Jul-07 15:52:58.305 [main] INFO  nextflow.script.BaseScript - 🔄 Using ALL SAMPLES mode - skipping MASH distance calculation
+Jul-07 15:52:58.310 [main] DEBUG nextflow.executor.ExecutorFactory - << taskConfig executor: local
+Jul-07 15:52:58.310 [main] DEBUG nextflow.executor.ExecutorFactory - >> processorType: 'local'
+Jul-07 15:52:58.311 [main] DEBUG nextflow.processor.TaskProcessor - Creating process 'BIN_SUBSAMPLE_OR_ALL': maxForks=0; fair=false; array=0
+Jul-07 15:52:58.317 [main] DEBUG nextflow.script.ProcessConfig - Config settings `withName:POPPUNK_MODEL` matches process POPPUNK_MODEL
+Jul-07 15:52:58.319 [main] DEBUG nextflow.executor.ExecutorFactory - << taskConfig executor: local
+Jul-07 15:52:58.320 [main] DEBUG nextflow.executor.ExecutorFactory - >> processorType: 'local'
+Jul-07 15:52:58.321 [main] DEBUG nextflow.processor.TaskProcessor - Creating process 'POPPUNK_MODEL': maxForks=0; fair=false; array=0
+Jul-07 15:52:58.327 [main] DEBUG nextflow.script.ProcessConfig - Config settings `withName:POPPUNK_REFINE` matches process POPPUNK_REFINE
+Jul-07 15:52:58.328 [main] DEBUG nextflow.executor.ExecutorFactory - << taskConfig executor: local
+Jul-07 15:52:58.328 [main] DEBUG nextflow.executor.ExecutorFactory - >> processorType: 'local'
+Jul-07 15:52:58.329 [main] DEBUG nextflow.processor.TaskProcessor - Creating process 'POPPUNK_REFINE': maxForks=0; fair=false; array=0
+Jul-07 15:52:58.333 [main] DEBUG nextflow.script.ProcessConfig - Config settings `withName:FILTER_ASSIGNMENT_SAMPLES` matches process FILTER_ASSIGNMENT_SAMPLES
+Jul-07 15:52:58.334 [main] DEBUG nextflow.executor.ExecutorFactory - << taskConfig executor: local
+Jul-07 15:52:58.335 [main] DEBUG nextflow.executor.ExecutorFactory - >> processorType: 'local'
+Jul-07 15:52:58.335 [main] DEBUG nextflow.processor.TaskProcessor - Creating process 'FILTER_ASSIGNMENT_SAMPLES': maxForks=0; fair=false; array=0
+Jul-07 15:52:58.339 [main] DEBUG nextflow.script.ProcessConfig - Config settings `withName:CHUNK_SAMPLES` matches process CHUNK_SAMPLES
+Jul-07 15:52:58.340 [main] DEBUG nextflow.executor.ExecutorFactory - << taskConfig executor: local
+Jul-07 15:52:58.340 [main] DEBUG nextflow.executor.ExecutorFactory - >> processorType: 'local'
+Jul-07 15:52:58.341 [main] DEBUG nextflow.processor.TaskProcessor - Creating process 'CHUNK_SAMPLES': maxForks=0; fair=false; array=0
+Jul-07 15:52:58.355 [main] DEBUG nextflow.script.ProcessConfig - Config settings `withName:POPPUNK_ASSIGN_CHUNK` matches process POPPUNK_ASSIGN_CHUNK
+Jul-07 15:52:58.357 [main] DEBUG nextflow.executor.ExecutorFactory - << taskConfig executor: local
+Jul-07 15:52:58.357 [main] DEBUG nextflow.executor.ExecutorFactory - >> processorType: 'local'
+Jul-07 15:52:58.359 [main] DEBUG nextflow.processor.TaskProcessor - Creating process 'POPPUNK_ASSIGN_CHUNK': maxForks=3; fair=false; array=0
+Jul-07 15:52:58.366 [main] DEBUG nextflow.script.ProcessConfig - Config settings `withName:MERGE_CHUNK_RESULTS` matches process MERGE_CHUNK_RESULTS
+Jul-07 15:52:58.368 [main] DEBUG nextflow.executor.ExecutorFactory - << taskConfig executor: local
+Jul-07 15:52:58.368 [main] DEBUG nextflow.executor.ExecutorFactory - >> processorType: 'local'
+Jul-07 15:52:58.369 [main] DEBUG nextflow.processor.TaskProcessor - Creating process 'MERGE_CHUNK_RESULTS': maxForks=0; fair=false; array=0
+Jul-07 15:52:58.375 [main] DEBUG nextflow.executor.ExecutorFactory - << taskConfig executor: local
+Jul-07 15:52:58.376 [main] DEBUG nextflow.executor.ExecutorFactory - >> processorType: 'local'
+Jul-07 15:52:58.376 [main] DEBUG nextflow.processor.TaskProcessor - Creating process 'SUMMARY_REPORT': maxForks=0; fair=false; array=0
+Jul-07 15:52:58.383 [main] DEBUG nextflow.executor.ExecutorFactory - << taskConfig executor: local
+Jul-07 15:52:58.383 [main] DEBUG nextflow.executor.ExecutorFactory - >> processorType: 'local'
+Jul-07 15:52:58.384 [main] DEBUG nextflow.processor.TaskProcessor - Creating process 'COPY_FINAL_RESULTS': maxForks=0; fair=false; array=0
+Jul-07 15:52:58.389 [main] DEBUG nextflow.Session - Workflow process names [dsl2]: BIN_SUBSAMPLE_OR_ALL, POPPUNK_REFINE, FILTER_ASSIGNMENT_SAMPLES, MASH_DIST, MASH_SKETCH, SUMMARY_REPORT, POPPUNK_MODEL, CHUNK_SAMPLES, MERGE_CHUNK_RESULTS, POPPUNK_ASSIGN_CHUNK, VALIDATE_FASTA, COPY_FINAL_RESULTS
+Jul-07 15:52:58.393 [main] DEBUG nextflow.Session - Igniting dataflow network (12)
+Jul-07 15:52:58.397 [main] DEBUG nextflow.processor.TaskProcessor - Starting process > VALIDATE_FASTA
+Jul-07 15:52:58.398 [main] DEBUG nextflow.processor.TaskProcessor - Starting process > BIN_SUBSAMPLE_OR_ALL
+Jul-07 15:52:58.399 [main] DEBUG nextflow.processor.TaskProcessor - Starting process > POPPUNK_MODEL
+Jul-07 15:52:58.399 [main] DEBUG nextflow.processor.TaskProcessor - Starting process > POPPUNK_REFINE
+Jul-07 15:52:58.399 [main] DEBUG nextflow.processor.TaskProcessor - Starting process > FILTER_ASSIGNMENT_SAMPLES
+Jul-07 15:52:58.399 [main] DEBUG nextflow.processor.TaskProcessor - Starting process > CHUNK_SAMPLES
+Jul-07 15:52:58.399 [PathVisitor-1] DEBUG nextflow.file.PathVisitor - files for syntax: glob; folder: /home/phemarajata/Downloads/bp_bigset/; pattern: *.fasta; options: [checkIfExists:true]
+Jul-07 15:52:58.399 [main] DEBUG nextflow.processor.TaskProcessor - Starting process > POPPUNK_ASSIGN_CHUNK
+Jul-07 15:52:58.399 [main] DEBUG nextflow.processor.TaskProcessor - Starting process > MERGE_CHUNK_RESULTS
+Jul-07 15:52:58.400 [main] DEBUG nextflow.processor.TaskProcessor - Starting process > SUMMARY_REPORT
+Jul-07 15:52:58.400 [main] DEBUG nextflow.processor.TaskProcessor - Starting process > COPY_FINAL_RESULTS
+Jul-07 15:52:58.400 [main] DEBUG nextflow.script.ScriptRunner - Parsed script files:
+  Script_31072e437f6e3e65: /home/phemarajata/Downloads/localpoppunk-final-fixed/poppunk_subsample_snp.nf
+Jul-07 15:52:58.400 [main] DEBUG nextflow.script.ScriptRunner - > Awaiting termination 
+Jul-07 15:52:58.400 [main] DEBUG nextflow.Session - Session await
+Jul-07 15:52:58.667 [Task submitter] DEBUG n.executor.local.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+Jul-07 15:52:58.669 [Task submitter] INFO  nextflow.Session - [9e/774dab] Submitted process > VALIDATE_FASTA (validate_fasta)
+Jul-07 15:53:10.039 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 1; name: VALIDATE_FASTA (validate_fasta); status: COMPLETED; exit: 0; error: -; workDir: /home/phemarajata/Downloads/localpoppunk-final-fixed/work/9e/774dab20c78a76d1d86c6e935a4e54]
+Jul-07 15:53:10.040 [Task monitor] DEBUG nextflow.util.ThreadPoolBuilder - Creating thread pool 'TaskFinalizer' minSize=10; maxSize=66; workQueue=LinkedBlockingQueue[-1]; allowCoreThreadTimeout=false
+Jul-07 15:53:10.050 [Actor Thread 19] INFO  nextflow.script.BaseScript - 
+==================================================
+Jul-07 15:53:10.050 [Actor Thread 19] INFO  nextflow.script.BaseScript - 📋 FASTA VALIDATION REPORT
+Jul-07 15:53:10.050 [Actor Thread 19] INFO  nextflow.script.BaseScript - ==================================================
+Jul-07 15:53:10.051 [Actor Thread 19] INFO  nextflow.script.BaseScript - FASTA Validation Report
+======================
+Total files processed: 451
+Valid files: 451
+Invalid files: 0
+
+Valid files (with absolute paths):
+  ✓ /home/phemarajata/Downloads/bp_bigset/IP-0013.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/ERS008781.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/IE-0001.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/IP-0154.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/ERS013365.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/ERS012369.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/GCA_963562235_1.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/IP-0044.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/IP-0171.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/GCF_000774405_1_Australia.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/IE-0005.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/GCA_963561565_1.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/IP-0016.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/ERS012327.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/GCF_014713065_1_Laos.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/IE-0021.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/IP-0131.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/GCA_963570575_1.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/ERS012303.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/GCA_963560735_1.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/IP-0026.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/IE-0024.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/IP-0006.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/GCF_001212405_2_Malaysia.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/GCA_963573135_1.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/IP-0150.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/IP-0109.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/IP-0089.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/IP-0001.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/GCA_963569325_1.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/GCA_963561835_1.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/GCA_963565015_1.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/GCA_963570085_1.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/ERS008798.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/IP-0169.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/GCF_002110925_1_USA_Texas.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/IP-0100.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/GCA_963567325_1.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/GCA_963560675_1.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/GCA_963564975_1.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/ERS008828.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/IP-0014.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/ERS008825.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/ERS008835.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/GCF_009830075_1_Thailand.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/GCA_900598305_2.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/IP-0201.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/IP-0120.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/IP-0018.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/GCA_963565085_1.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/GCA_963571365_1.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/IE-0009.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/GCF_001212705_2_Malaysia.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/IP-0110.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/GCF_000259795_1_Thailand.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/IP-0002.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/GCF_001980775_1_Thailand.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/IP-0202.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/GCA_963573225_1.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/ERS008820.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/IP-0096.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/IP-0163.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/IP-0102.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/IP-0112.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/GCA_963566475_1.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/GCF_002110985_1_USA_Puerto_Rico.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/GCA_963561925_1.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/IP-0012.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/GCA_963568705_1.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/GCA_963561975_1.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/GCA_963566085_1.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/IP-0087.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/GCF_025847905_1_Viet_Nam.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/GCF_014712875_1_Laos.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/IE-0003.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/GCA_963563475_1.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/GCF_025847415_1_Viet_Nam.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/IP-0055.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/IP-0008.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/IP-0167.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/IP-0182.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/GCA_963568885_1.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/IP-0094.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/IP-0015.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/GCF_014712955_1_Laos.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/ERS012330.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/IP-0051.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/GCA_963561915_1.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/IP-0057.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/GCA_963566495_1.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/IP-0107.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/IE-0022.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/IP-0121.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/IP-0004.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/ERS013360.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/IP-0084.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/IP-0162.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/GCA_963569365_1.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/GCA_900597175_2.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/GCF_014712945_1_Laos.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/IP-0075.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/IP-0187.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/IP-0103.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/GCA_963561355_1.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/IP-0029.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/GCA_963566765_1.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/IP-0134.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/ERS012358.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/GCA_963562795_1.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/GCA_963566455_1.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/ERS008790.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/IP-0054.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/IP-0022.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/IP-0137.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/IP-0111.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/IP-0097.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/IE-0013.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/SRR12527871_contigs.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/GCF_000182195_1_Thailand.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/IP-0156.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/IP-0081.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/IP-0108.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/IP-0141.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/IE-0004.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/ERS008841.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/IE-0014.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/IP-0173.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/IP-0031.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/GCA_963569705_1.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/ERS008819.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/IP-0181.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/GCF_014712775_1_Laos.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/ERS008785.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/ERS012370.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/IE-0007.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/IP-0043.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/GCA_963560945_1.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/GCA_963569645_1.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/GCA_963572615_1.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/IP-0067.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/IP-0069.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/IP-0183.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/IP-0125.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/GCA_963568055_1.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/GCA_963561735_1.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/ERS013345.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/GCF_014713015_1_Laos.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/GCA_963572995_1.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/GCA_963564375_1.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/GCF_000410895_1_Thailand.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/GCA_963572755_1.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/GCA_963573025_1.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/IP-0185.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/IP-0099.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/GCF_025848135_1_Viet_Nam.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/IP-0117.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/IP-0148.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/IP-0025.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/GCA_963560915_1.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/IE-0026.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/GCF_001207785_2_Malaysia.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/GCF_000773235_1_Australia.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/ERS008833.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/GCF_025847635_1_Viet_Nam.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/GCF_001326935_2_Malaysia.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/GCA_963565125_1.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/GCF_009827035_1_Viet_Nam.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/GCA_963566635_1.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/ERS008830.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/ERS008821.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/IP-0159.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/IP-0079.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/GCA_963564305_1.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/IP-0068.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/IP-0189.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/IP-0132.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/ERS012365.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/IP-0190.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/IP-0136.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/IP-0101.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/IP-0050.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/IE-0006.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/ERS008794.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/IP-0142.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/ERS008836.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/GCF_014712915_1_Laos.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/GCA_963571975_1.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/IP-0160.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/GCA_963570025_1.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/ERS008816.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/IP-0149.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/ERS012363.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/ERS012340.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/GCA_963561435_1.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/IP-0093.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/GCA_963566675_1.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/GCA_963563155_1.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/ERS013343.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/ERS008813.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/IP-0178.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/GCA_963563715_1.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/IP-0193.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/IP-0144.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/IP-0152.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/GCF_014713055_1_Laos.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/IP-0062.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/IE-0019.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/IP-0151.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/GCF_000774495_1_Australia.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/SRR12527885_contigs.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/GCF_014712935_1_Laos.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/GCF_009826725_1_Viet_Nam.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/IP-0122.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/IP-0147.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/ERS008829.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/IP-0028.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/ERS012313.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/ERS013348.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/IP-0064.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/ERS013342.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/IP-0155.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/IP-0073.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/ERS012308.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/IP-0200.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/IP-0164.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/IP-0177.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/IP-0165.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/IP-0157.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/IP-0063.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/IP-0060.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/GCA_963564325_1.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/ERS012317.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/ERS008803.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/ERS012328.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/GCA_963571055_1.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/GCA_900595585_2.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/GCA_963565675_1.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/IP-0129.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/IP-0023.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/IP-0199.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/GCF_002111105_1_USA_California.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/IP-0046.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/ERS012320.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/GCA_963571495_1.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/IP-0033.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/ERS008817.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/ERS008837.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/GCA_963565345_1.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/GCF_001980755_1_Thailand.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/GCA_900596305_2.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/ERS012380.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/ERS008822.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/IP-0041.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/IP-0098.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/IP-0127.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/GCA_963562695_1.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/GCF_025848015_1_Viet_Nam.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/IP-0104.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/IP-0080.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/GCA_963573175_1.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/IP-0091.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/IP-0034.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/IP-0071.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/IE-0018.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/IP-0011.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/ERS012356.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/IP-0065.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/GCF_003268105_1_Viet_Nam.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/IP-0070.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/IE-0011.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/IP-0047.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/ERS008792.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/IP-0139.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/GCA_963571845_1.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/IP-0030.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/GCA_963569685_1.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/GCF_014712825_1_Laos.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/IP-0076.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/IP-0170.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/IP-0158.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/ERS012331.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/IP-0113.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/IP-0010.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/IP-0036.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/IP-0197.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/IP-0059.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/IP-0017.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/GCA_963567935_1.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/IP-0056.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/ERS012324.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/ERS013358.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/IE-0016.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/GCF_000774965_1_Australia.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/IP-0037.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/IP-0143.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/ERS013346.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/IE-0017.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/GCA_963566855_1.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/ERS012354.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/IP-0153.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/IP-0133.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/IP-0175.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/IP-0035.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/IE-0015.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/IE-0012.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/ERS013363.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/IP-0074.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/IP-0191.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/IP-0105.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/IP-0040.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/GCA_963560585_1.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/IP-0184.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/IP-0161.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/IP-0007.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/ERS012309.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/IP-0083.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/IP-0172.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/IP-0058.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/IP-0196.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/GCA_963562655_1.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/IP-0024.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/GCA_963568785_1.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/GCA_963561215_1.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/IP-0003.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/IP-0020.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/GCA_963561245_1.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/GCA_963567115_1.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/GCA_963561855_1.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/IP-0146.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/GCA_963571005_1.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/IP-0128.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/IP-0124.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/GCF_014712815_1_Laos.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/GCA_963563525_1.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/GCF_001980725_1_Thailand.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/IP-0176.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/IP-0115.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/IP-0053.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/IP-0042.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/IP-0048.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/ERS012347.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/IP-0090.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/ERS013352.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/IP-0092.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/IP-0027.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/IP-0119.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/ERS013354.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/ERS012314.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/GCF_009830095_1_Thailand.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/IP-0021.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/GCF_014713085_1_Laos.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/IP-0095.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/GCF_014712835_1_Laos.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/ERS013364.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/GCF_000259815_1_Thailand.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/GCA_963563305_1.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/GCA_963565565_1.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/GCF_014712965_1_Laos.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/GCF_002111145_1_USA_Arizona_ex_Costa_Rica.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/GCA_963571475_1.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/GCA_963573095_1.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/IP-0019.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/GCF_014712895_1_Laos.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/GCF_001980815_1_Thailand.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/GCA_963566175_1.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/IP-0123.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/GCF_000756905_1_Australia_Townsville_Queensland.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/GCA_963563635_1.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/IP-0114.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/ERS013353.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/GCA_963571745_1.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/IP-0166.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/ERS012316.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/IE-0010.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/IP-0072.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/IP-0145.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/ERS012351.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/GCF_001326955_2_Malaysia.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/GCA_963570975_1.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/IP-0180.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/IP-0138.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/GCA_963569795_1.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/IP-0118.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/ERS012376.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/ERS012338.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/IP-0066.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/IP-0045.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/GCF_003268075_1_Viet_Nam.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/GCA_963562615_1.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/IP-0179.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/GCF_003268115_1_Viet_Nam.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/IP-0195.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/IP-0086.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/ERS013355.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/ERS012362.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/ERS008838.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/IP-0038.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/IP-0061.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/ERS012307.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/GCA_963562965_1.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/IP-0039.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/IP-0052.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/ERS008784.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/IP-0186.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/GCF_014713025_1_Laos.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/ERS008809.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/IP-0106.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/GCA_963564785_1.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/GCA_963571905_1.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/IP-0049.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/IP-0085.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/GCA_963570105_1.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/ERS008786.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/ERS008844.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/GCA_963561075_1.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/IP-0168.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/IP-0088.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/GCA_963561765_1.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/IP-0126.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/GCA_963565485_1.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/ERS012306.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/GCA_963562325_1.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/IP-0005.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/GCA_963565395_1.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/ERS008824.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/IP-0032.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/IP-0116.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/GCA_963566625_1.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/GCA_963566695_1.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/IP-0192.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/IP-0078.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/ERS012312.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/IP-0082.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/IP-0135.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/ERS008804.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/IP-0140.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/IP-0009.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/IP-0188.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/GCA_963569785_1.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/GCA_963563065_1.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/ERS012332.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/ERS008797.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/ERS008795.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/GCA_963561895_1.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/ERS012359.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/ERS012334.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/IP-0077.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/GCA_963568005_1.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/IP-0174.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/ERS012377.fasta
+  ✓ /home/phemarajata/Downloads/bp_bigset/IP-0130.fasta
+
+
+Jul-07 15:53:10.052 [Actor Thread 19] INFO  nextflow.script.BaseScript - ==================================================
+
+Jul-07 15:53:10.055 [TaskFinalizer-1] DEBUG nextflow.util.ThreadPoolBuilder - Creating thread pool 'PublishDir' minSize=10; maxSize=66; workQueue=LinkedBlockingQueue[-1]; allowCoreThreadTimeout=false
+Jul-07 15:53:10.078 [Task submitter] DEBUG n.executor.local.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+Jul-07 15:53:10.079 [Task submitter] INFO  nextflow.Session - [a6/04f08a] Submitted process > BIN_SUBSAMPLE_OR_ALL (bin_subsample_or_all)
+Jul-07 15:53:12.285 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 2; name: BIN_SUBSAMPLE_OR_ALL (bin_subsample_or_all); status: COMPLETED; exit: 0; error: -; workDir: /home/phemarajata/Downloads/localpoppunk-final-fixed/work/a6/04f08a035a8383e834c5b1719ba857]
+Jul-07 15:53:12.327 [Task submitter] DEBUG n.executor.local.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+Jul-07 15:53:12.327 [Task submitter] INFO  nextflow.Session - [49/e6ac1e] Submitted process > POPPUNK_MODEL (poppunk_model)
+Jul-07 15:53:48.040 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 3; name: POPPUNK_MODEL (poppunk_model); status: COMPLETED; exit: 0; error: -; workDir: /home/phemarajata/Downloads/localpoppunk-final-fixed/work/49/e6ac1e3bdde80898a8c8e1f97bd5b4]
+Jul-07 15:53:48.054 [Task submitter] DEBUG n.executor.local.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+Jul-07 15:53:48.054 [Task submitter] INFO  nextflow.Session - [95/05044e] Submitted process > FILTER_ASSIGNMENT_SAMPLES (filter_assignment_samples)
+Jul-07 15:53:48.063 [Task submitter] DEBUG n.executor.local.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+Jul-07 15:53:48.063 [Task submitter] INFO  nextflow.Session - [a0/cdf0eb] Submitted process > POPPUNK_REFINE (poppunk_refine)
+Jul-07 15:53:48.384 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 4; name: FILTER_ASSIGNMENT_SAMPLES (filter_assignment_samples); status: COMPLETED; exit: 0; error: -; workDir: /home/phemarajata/Downloads/localpoppunk-final-fixed/work/95/05044ee90c6959daf6fd4ae63d7212]
+Jul-07 15:53:48.394 [Task submitter] DEBUG n.executor.local.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+Jul-07 15:53:48.394 [Task submitter] INFO  nextflow.Session - [da/2b41b7] Submitted process > CHUNK_SAMPLES (chunk_samples)
+Jul-07 15:53:48.683 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 6; name: CHUNK_SAMPLES (chunk_samples); status: COMPLETED; exit: 0; error: -; workDir: /home/phemarajata/Downloads/localpoppunk-final-fixed/work/da/2b41b7186be229f8c45a2437e45281]
+Jul-07 15:53:50.643 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 5; name: POPPUNK_REFINE (poppunk_refine); status: COMPLETED; exit: 0; error: -; workDir: /home/phemarajata/Downloads/localpoppunk-final-fixed/work/a0/cdf0eb3a289fc50eb9c54cc1eca8ba]
+Jul-07 15:53:50.690 [Task submitter] DEBUG n.executor.local.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+Jul-07 15:53:50.690 [Task submitter] INFO  nextflow.Session - [54/d85d05] Submitted process > POPPUNK_ASSIGN_CHUNK (poppunk_assign_chunk_0)
+Jul-07 15:53:51.260 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 7; name: POPPUNK_ASSIGN_CHUNK (poppunk_assign_chunk_0); status: COMPLETED; exit: 0; error: -; workDir: /home/phemarajata/Downloads/localpoppunk-final-fixed/work/54/d85d05103d4788aa8bac29320c137b]
+Jul-07 15:53:51.271 [Task submitter] DEBUG n.executor.local.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+Jul-07 15:53:51.272 [Task submitter] INFO  nextflow.Session - [2b/7f3016] Submitted process > MERGE_CHUNK_RESULTS (merge_chunk_results)
+Jul-07 15:53:51.547 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 8; name: MERGE_CHUNK_RESULTS (merge_chunk_results); status: COMPLETED; exit: 0; error: -; workDir: /home/phemarajata/Downloads/localpoppunk-final-fixed/work/2b/7f301676c5d5639e27c97b2b9c36b6]
+Jul-07 15:53:51.556 [Task submitter] DEBUG n.executor.local.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+Jul-07 15:53:51.557 [Task submitter] INFO  nextflow.Session - [ce/399525] Submitted process > SUMMARY_REPORT (summary_report)
+Jul-07 15:53:58.121 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 9; name: SUMMARY_REPORT (summary_report); status: COMPLETED; exit: 0; error: -; workDir: /home/phemarajata/Downloads/localpoppunk-final-fixed/work/ce/39952560da6b033cb8bed2a766e336]
+Jul-07 15:53:58.133 [Task submitter] DEBUG n.executor.local.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+Jul-07 15:53:58.134 [Task submitter] INFO  nextflow.Session - [e4/3508b7] Submitted process > COPY_FINAL_RESULTS (copy_final_results)
+Jul-07 15:53:58.388 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 10; name: COPY_FINAL_RESULTS (copy_final_results); status: COMPLETED; exit: 0; error: -; workDir: /home/phemarajata/Downloads/localpoppunk-final-fixed/work/e4/3508b7d2b634d37e7098344fbf3a80]
+Jul-07 15:53:58.390 [main] DEBUG nextflow.Session - Session await > all processes finished
+Jul-07 15:53:58.488 [Task monitor] DEBUG n.processor.TaskPollingMonitor - <<< barrier arrives (monitor: local) - terminating tasks monitor poll loop
+Jul-07 15:53:58.489 [main] DEBUG nextflow.Session - Session await > all barriers passed
+Jul-07 15:53:58.491 [main] DEBUG nextflow.util.ThreadPoolManager - Thread pool 'TaskFinalizer' shutdown completed (hard=false)
+Jul-07 15:53:58.492 [main] DEBUG nextflow.util.ThreadPoolManager - Thread pool 'PublishDir' shutdown completed (hard=false)
+Jul-07 15:53:58.495 [main] DEBUG n.trace.WorkflowStatsObserver - Workflow completed > WorkflowStats[succeededCount=10; failedCount=0; ignoredCount=0; cachedCount=0; pendingCount=0; submittedCount=0; runningCount=0; retriesCount=0; abortedCount=0; succeedDuration=11m 6s; failedDuration=0ms; cachedDuration=0ms;loadCpus=0; loadMemory=0; peakRunning=2; peakCpus=20; peakMemory=60 GB; ]
+Jul-07 15:53:58.495 [main] DEBUG nextflow.trace.ReportObserver - Workflow completed -- rendering execution report
+Jul-07 15:53:58.793 [main] DEBUG nextflow.trace.TimelineObserver - Workflow completed -- rendering execution timeline
+Jul-07 15:53:58.879 [main] DEBUG nextflow.cache.CacheDB - Closing CacheDB done
+Jul-07 15:53:58.888 [main] DEBUG nextflow.util.ThreadPoolManager - Thread pool 'FileTransfer' shutdown completed (hard=false)
+Jul-07 15:53:58.888 [main] DEBUG nextflow.script.ScriptRunner - > Execution complete -- Goodbye
