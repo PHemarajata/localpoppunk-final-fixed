@@ -335,7 +335,7 @@ process POPPUNK_MODEL {
             echo "ERROR: Staged file not found: \$basename_file"
             exit 1
         fi
-            done < ${sub_list}
+    done < ${sub_list}
     
     echo "Created staged files list:"
     cat staged_files.list
@@ -364,78 +364,107 @@ process POPPUNK_MODEL {
     echo "PopPUNK QC will be applied during assignment step if enabled..."
     cp staged_files.list staged_files_qc.list
 
-    # ULTRA BUS ERROR PREVENTION: Start with most conservative settings first
-    echo "🚨 Implementing ultra-conservative bus error prevention strategy..."
-    
-    # Attempt 1: Ultra-minimal parameters to prevent bus errors
-    echo "Attempt 1: Ultra-minimal model fitting (single-threaded, basic parameters)..."
-    if poppunk --fit-model bgmm --ref-db poppunk_db \\
-        --output poppunk_fit --threads 1 \\
-        --max-a-dist 0.8 \\
-        --max-search-depth 3 \\
-        --K 2; then
-        
-        echo "✅ Model fitting completed with ultra-minimal settings"
-        
-    else
-        echo "⚠️  Attempt 1 failed, trying with default PopPUNK parameters..."
-        
-        # Attempt 2: Default PopPUNK parameters (no custom k-mer settings)
-        echo "Attempt 2: Default PopPUNK model fitting (no enhanced parameters)..."
+    # ENHANCED MODEL FITTING: Use specified model type with fallback strategy
+    echo "🚨 Model fitting with specified model type: ${params.poppunk_model_type}"
+
+    model_type="${params.poppunk_model_type}"
+    echo "Using \$model_threads threads for model fitting"
+
+    # Model fitting based on specified type
+    if [ "\$model_type" = "bgmm" ]; then
+        echo "Attempt 1: BGMM model fitting (as specified)..."
         if poppunk --fit-model bgmm --ref-db poppunk_db \\
-            --output poppunk_fit_attempt2 --threads 1 \\
-            --K 2; then
+            --output poppunk_fit --threads \$model_threads \\
+            --max-a-dist ${params.poppunk_max_a_dist} \\
+            --max-search-depth ${params.poppunk_max_search} \\
+            --K ${params.poppunk_K}; then
             
-            echo "✅ Model fitting completed with default parameters"
-            mv poppunk_fit_attempt2 poppunk_fit
+            echo "✅ BGMM model fitting completed successfully"
             
         else
-            echo "⚠️  Attempt 2 failed, trying with DBSCAN fallback..."
-            
-            # Attempt 3: DBSCAN fallback (more stable than BGMM for large datasets)
-            echo "Attempt 3: DBSCAN model fitting (most stable for large datasets)..."
-            if poppunk --fit-model dbscan --ref-db poppunk_db \\
-                --output poppunk_fit_attempt3 --threads 1; then
+            echo "⚠️  BGMM failed, trying with reduced parameters..."
+            if poppunk --fit-model bgmm --ref-db poppunk_db \\
+                --output poppunk_fit_attempt2 --threads 1 \\
+                --K 2; then
                 
-                echo "✅ Model fitting completed with DBSCAN fallback"
-                mv poppunk_fit_attempt3 poppunk_fit
+                echo "✅ BGMM completed with reduced parameters"
+                mv poppunk_fit_attempt2 poppunk_fit
+            else
+                echo "⚠️  BGMM failed completely, falling back to DBSCAN..."
+                poppunk --fit-model dbscan --ref-db poppunk_db \\
+                    --output poppunk_fit_fallback --threads 1
+                mv poppunk_fit_fallback poppunk_fit
+            fi
+        fi
+
+    elif [ "\$model_type" = "dbscan" ]; then
+        echo "Attempt 1: DBSCAN model fitting (as specified)..."
+        if poppunk --fit-model dbscan --ref-db poppunk_db \\
+            --output poppunk_fit --threads \$model_threads; then
+            
+            echo "✅ DBSCAN model fitting completed successfully"
+            
+        else
+            echo "⚠️  DBSCAN failed, trying single-threaded..."
+            if poppunk --fit-model dbscan --ref-db poppunk_db \\
+                --output poppunk_fit_attempt2 --threads 1; then
+                
+                echo "✅ DBSCAN completed with single thread"
+                mv poppunk_fit_attempt2 poppunk_fit
+            else
+                echo "⚠️  DBSCAN failed completely, falling back to threshold..."
+                poppunk --fit-model threshold --ref-db poppunk_db \\
+                    --output poppunk_fit_fallback --threads 1 \\
+                    --threshold 0.02
+                mv poppunk_fit_fallback poppunk_fit
+            fi
+        fi
+
+    elif [ "\$model_type" = "threshold" ]; then
+        echo "Attempt 1: Threshold model fitting (as specified)..."
+        if poppunk --fit-model threshold --ref-db poppunk_db \\
+            --output poppunk_fit --threads \$model_threads \\
+            --threshold ${params.poppunk_threshold:-0.02}; then
+            
+            echo "✅ Threshold model fitting completed successfully"
+            
+        else
+            echo "⚠️  Threshold model failed, trying with default threshold..."
+            poppunk --fit-model threshold --ref-db poppunk_db \\
+                --output poppunk_fit_attempt2 --threads 1 \\
+                --threshold 0.02
+            mv poppunk_fit_attempt2 poppunk_fit
+        fi
+
+    else
+        echo "Attempt 1: Auto model selection (progressive fallback)..."
+        # Original progressive fallback strategy
+        if poppunk --fit-model bgmm --ref-db poppunk_db \\
+            --output poppunk_fit --threads 1 \\
+            --max-a-dist 0.8 \\
+            --max-search-depth 3 \\
+            --K 2; then
+            
+            echo "✅ Auto: BGMM model completed"
+            
+        else
+            echo "⚠️  Auto: BGMM failed, trying DBSCAN..."
+            if poppunk --fit-model dbscan --ref-db poppunk_db \\
+                --output poppunk_fit_attempt2 --threads 1; then
+                
+                echo "✅ Auto: DBSCAN model completed"
+                mv poppunk_fit_attempt2 poppunk_fit
                 
             else
-                echo "⚠️  Attempt 3 failed, trying threshold model..."
-                
-                # Attempt 4: Threshold model (simplest, most stable)
-                echo "Attempt 4: Threshold model fitting (simplest approach)..."
-                if poppunk --fit-model threshold --ref-db poppunk_db \\
-                    --output poppunk_fit_attempt4 --threads 1 \\
-                    --threshold 0.02; then
-                    
-                    echo "✅ Model fitting completed with threshold model"
-                    mv poppunk_fit_attempt4 poppunk_fit
-                    
-                else
-                    echo "❌ All model fitting attempts failed - this indicates a serious issue"
-                    echo "Possible causes:"
-                    echo "1. Dataset too large for available memory"
-                    echo "2. Corrupted database files"
-                    echo "3. Hardware memory issues"
-                    echo "4. PopPUNK version compatibility issues"
-                    
-                    # Create minimal database structure to prevent pipeline failure
-                    echo "Creating minimal fallback structure..."
-                    mkdir -p poppunk_fit
-                    echo "sample,cluster" > poppunk_fit/fallback_clusters.csv
-                    
-                    # Add all samples to a single cluster as fallback
-                    while IFS=\$'\\t' read -r sample_name file_path; do
-                        echo "\$sample_name,1" >> poppunk_fit/fallback_clusters.csv
-                            done < staged_files.list
-                    
-                    echo "⚠️  Created fallback single-cluster assignment"
-                fi
+                echo "⚠️  Auto: DBSCAN failed, using threshold..."
+                poppunk --fit-model threshold --ref-db poppunk_db \\
+                    --output poppunk_fit_attempt3 --threads 1 \\
+                    --threshold 0.02
+                mv poppunk_fit_attempt3 poppunk_fit
             fi
         fi
     fi
-
+    
     echo "Model fitting completed. Copying fitted model files to database directory..."
     
     # Copy all fitted model files from poppunk_fit to poppunk_db
