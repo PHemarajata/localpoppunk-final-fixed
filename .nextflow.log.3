@@ -1,144 +1,80 @@
-Jul-07 16:43:12.958 [main] DEBUG nextflow.cli.Launcher - $> nextflow run poppunk_subsample_snp.nf -profile large_dataset_optimized --input /home/phemarajata/Downloads/bp_bigset/ --resultsDir /home/phemarajata/Downloads/bp_bigset/refined_samples_results --use_all_samples false -resume
-Jul-07 16:43:13.019 [main] DEBUG nextflow.cli.CmdRun - N E X T F L O W  ~  version 25.04.4
-Jul-07 16:43:13.034 [main] DEBUG nextflow.plugin.PluginsFacade - Setting up plugin manager > mode=prod; embedded=false; plugins-dir=/home/phemarajata/.nextflow/plugins; core-plugins: nf-amazon@2.15.0,nf-azure@1.16.0,nf-cloudcache@0.4.3,nf-codecommit@0.2.3,nf-console@1.2.1,nf-google@1.21.0,nf-k8s@1.0.0,nf-tower@1.11.3,nf-wave@1.12.1
-Jul-07 16:43:13.048 [main] INFO  o.pf4j.DefaultPluginStatusProvider - Enabled plugins: []
-Jul-07 16:43:13.049 [main] INFO  o.pf4j.DefaultPluginStatusProvider - Disabled plugins: []
-Jul-07 16:43:13.055 [main] INFO  org.pf4j.DefaultPluginManager - PF4J version 3.12.0 in 'deployment' mode
-Jul-07 16:43:13.063 [main] INFO  org.pf4j.AbstractPluginManager - No plugins
-Jul-07 16:43:13.078 [main] DEBUG nextflow.config.ConfigBuilder - Found config local: /home/phemarajata/Downloads/localpoppunk-final-fixed/nextflow.config
-Jul-07 16:43:13.082 [main] DEBUG nextflow.config.ConfigBuilder - Parsing config file: /home/phemarajata/Downloads/localpoppunk-final-fixed/nextflow.config
-Jul-07 16:43:13.107 [main] DEBUG n.secret.LocalSecretsProvider - Secrets store: /home/phemarajata/.nextflow/secrets/store.json
-Jul-07 16:43:13.109 [main] DEBUG nextflow.secret.SecretsLoader - Discovered secrets providers: [nextflow.secret.LocalSecretsProvider@779de014] - activable => nextflow.secret.LocalSecretsProvider@779de014
-Jul-07 16:43:13.119 [main] DEBUG nextflow.config.ConfigBuilder - Applying config profile: `large_dataset_optimized`
-Jul-07 16:43:13.638 [main] DEBUG nextflow.config.ConfigBuilder - Available config profiles: [bus_error_prevention, large_dataset_optimized, ultra_bus_error_prevention, local]
-Jul-07 16:43:13.661 [main] DEBUG nextflow.cli.CmdRun - Applied DSL=2 from script declaration
-Jul-07 16:43:13.674 [main] DEBUG nextflow.cli.CmdRun - Launching `poppunk_subsample_snp.nf` [dreamy_curie] DSL2 - revision: aaf3704840
-Jul-07 16:43:13.675 [main] DEBUG nextflow.plugin.PluginsFacade - Plugins default=[]
-Jul-07 16:43:13.675 [main] DEBUG nextflow.plugin.PluginsFacade - Plugins resolved requirement=[]
-Jul-07 16:43:13.706 [main] DEBUG nextflow.Session - Session UUID: 299d8ad5-c032-41cb-b4f2-1b91156b41fa
-Jul-07 16:43:13.707 [main] DEBUG nextflow.Session - Run name: dreamy_curie
-Jul-07 16:43:13.707 [main] DEBUG nextflow.Session - Executor pool size: 22
-Jul-07 16:43:13.712 [main] DEBUG nextflow.file.FilePorter - File porter settings maxRetries=3; maxTransfers=50; pollTimeout=null
-Jul-07 16:43:13.716 [main] DEBUG nextflow.util.ThreadPoolBuilder - Creating thread pool 'FileTransfer' minSize=10; maxSize=66; workQueue=LinkedBlockingQueue[-1]; allowCoreThreadTimeout=false
-Jul-07 16:43:13.736 [main] DEBUG nextflow.cli.CmdRun - 
-  Version: 25.04.4 build 5950
-  Created: 16-06-2025 14:23 UTC (21:23 ICST)
-  System: Linux 6.11.0-29-generic
-  Runtime: Groovy 4.0.26 on Java HotSpot(TM) 64-Bit Server VM 17.0.12+8-LTS-286
+Jul-08 13:04:02.389 [main] DEBUG nextflow.cli.Launcher - $> nextflow run poppunk_subsample_snp.nf -profile dgx_a100 --input /home/cdcadmin/Downloads/bp_contextual_samples/ --resultsDir /home/cdcadmin/Downloads/bp_contextual_samples/poppunk_results
+Jul-08 13:04:02.506 [main] DEBUG nextflow.cli.CmdRun - N E X T F L O W  ~  version 24.04.3
+Jul-08 13:04:02.524 [main] DEBUG nextflow.plugin.PluginsFacade - Setting up plugin manager > mode=prod; embedded=false; plugins-dir=/home/cdcadmin/.nextflow/plugins; core-plugins: nf-amazon@2.5.2,nf-azure@1.6.0,nf-cloudcache@0.4.1,nf-codecommit@0.2.0,nf-console@1.1.3,nf-ga4gh@1.3.0,nf-google@1.13.2-patch1,nf-tower@1.9.1,nf-wave@1.4.2
+Jul-08 13:04:02.533 [main] INFO  o.pf4j.DefaultPluginStatusProvider - Enabled plugins: []
+Jul-08 13:04:02.534 [main] INFO  o.pf4j.DefaultPluginStatusProvider - Disabled plugins: []
+Jul-08 13:04:02.536 [main] INFO  org.pf4j.DefaultPluginManager - PF4J version 3.10.0 in 'deployment' mode
+Jul-08 13:04:02.549 [main] INFO  org.pf4j.AbstractPluginManager - No plugins
+Jul-08 13:04:02.570 [main] DEBUG nextflow.config.ConfigBuilder - Found config local: /home/cdcadmin/localpoppunk-final-fixed/nextflow.config
+Jul-08 13:04:02.573 [main] DEBUG nextflow.config.ConfigBuilder - Parsing config file: /home/cdcadmin/localpoppunk-final-fixed/nextflow.config
+Jul-08 13:04:02.599 [main] DEBUG n.secret.LocalSecretsProvider - Secrets store: /home/cdcadmin/.nextflow/secrets/store.json
+Jul-08 13:04:02.602 [main] DEBUG nextflow.secret.SecretsLoader - Discovered secrets providers: [nextflow.secret.LocalSecretsProvider@267bbe1a] - activable => nextflow.secret.LocalSecretsProvider@267bbe1a
+Jul-08 13:04:02.615 [main] DEBUG nextflow.config.ConfigBuilder - Applying config profile: `dgx_a100`
+Jul-08 13:04:03.410 [main] DEBUG nextflow.config.ConfigBuilder - Available config profiles: [bus_error_prevention, large_dataset_optimized, ultra_bus_error_prevention, dgx_a100_conservative, dgx_a100, local]
+Jul-08 13:04:03.448 [main] DEBUG nextflow.cli.CmdRun - Applied DSL=2 from script declaration
+Jul-08 13:04:03.469 [main] DEBUG nextflow.cli.CmdRun - Launching `poppunk_subsample_snp.nf` [spontaneous_poincare] DSL2 - revision: 23a9e12870
+Jul-08 13:04:03.470 [main] WARN  nextflow.cli.CmdRun - Nextflow variables must be defined in the launching environment - The following variable set in the config file is going to be ignored: 'NXF_OPTS'
+Jul-08 13:04:03.472 [main] DEBUG nextflow.plugin.PluginsFacade - Plugins default=[]
+Jul-08 13:04:03.472 [main] DEBUG nextflow.plugin.PluginsFacade - Plugins resolved requirement=[]
+Jul-08 13:04:03.528 [main] DEBUG nextflow.Session - Session UUID: e67f3b60-50f8-4881-b567-0da56d75be9d
+Jul-08 13:04:03.528 [main] DEBUG nextflow.Session - Run name: spontaneous_poincare
+Jul-08 13:04:03.528 [main] DEBUG nextflow.Session - Executor pool size: 128
+Jul-08 13:04:03.536 [main] DEBUG nextflow.file.FilePorter - File porter settings maxRetries=3; maxTransfers=50; pollTimeout=null
+Jul-08 13:04:03.541 [main] DEBUG nextflow.util.ThreadPoolBuilder - Creating thread pool 'FileTransfer' minSize=10; maxSize=384; workQueue=LinkedBlockingQueue[10000]; allowCoreThreadTimeout=false
+Jul-08 13:04:03.562 [main] DEBUG nextflow.cli.CmdRun - 
+  Version: 24.04.3 build 5916
+  Created: 09-07-2024 19:35 UTC (10-07-2024 02:35 ICST)
+  System: Linux 5.15.0-143-generic
+  Runtime: Groovy 4.0.21 on OpenJDK 64-Bit Server VM 17.0.10+7
   Encoding: UTF-8 (UTF-8)
-  Process: 3899478@phemarajata-Stealth-16-MercedesAMG-A1VGG [127.0.1.1]
-  CPUs: 22 - Mem: 62.3 GB (1.9 GB) - Swap: 8 GB (7.3 GB)
-Jul-07 16:43:13.761 [main] DEBUG nextflow.Session - Work-dir: /home/phemarajata/Downloads/localpoppunk-final-fixed/work [ext2/ext3]
-Jul-07 16:43:13.762 [main] DEBUG nextflow.Session - Script base path does not exist or is not a directory: /home/phemarajata/Downloads/localpoppunk-final-fixed/bin
-Jul-07 16:43:13.767 [main] DEBUG nextflow.executor.ExecutorFactory - Extension executors providers=[]
-Jul-07 16:43:13.774 [main] DEBUG nextflow.Session - Observer factory: DefaultObserverFactory
-Jul-07 16:43:13.793 [main] DEBUG nextflow.Session - Observer factory (v2): LinObserverFactory
-Jul-07 16:43:13.819 [main] DEBUG nextflow.cache.CacheFactory - Using Nextflow cache factory: nextflow.cache.DefaultCacheFactory
-Jul-07 16:43:13.827 [main] DEBUG nextflow.util.CustomThreadPool - Creating default thread pool > poolSize: 23; maxThreads: 1000
-Jul-07 16:43:13.875 [main] DEBUG nextflow.Session - Session start
-Jul-07 16:43:13.880 [main] DEBUG nextflow.Session - Report file already exists: /home/phemarajata/Downloads/bp_bigset/refined_samples_results/reports/execution_report.html -- enable the 'report.overwrite' option in your config file to overwrite existing files
-nextflow.exception.AbortOperationException: Report file already exists: /home/phemarajata/Downloads/bp_bigset/refined_samples_results/reports/execution_report.html -- enable the 'report.overwrite' option in your config file to overwrite existing files
-	at nextflow.trace.ReportObserver.onFlowCreate(ReportObserver.groovy:133)
-	at nextflow.Session$_notifyFlowCreate_lambda40.doCall(Session.groovy:1093)
-	at nextflow.Session.notifyEvent(Session.groovy:1138)
-	at nextflow.Session.notifyFlowCreate(Session.groovy:1093)
-	at nextflow.Session.start(Session.groovy:585)
-	at nextflow.script.ScriptRunner.execute(ScriptRunner.groovy:133)
-	at nextflow.cli.CmdRun.run(CmdRun.groovy:379)
-	at nextflow.cli.Launcher.run(Launcher.groovy:513)
-	at nextflow.cli.Launcher.main(Launcher.groovy:673)
-Jul-07 16:43:13.881 [main] DEBUG nextflow.Session - Timeline file already exists: /home/phemarajata/Downloads/bp_bigset/refined_samples_results/reports/timeline.html -- enable the 'timeline.overwrite' option in your config file to overwrite existing files
-nextflow.exception.AbortOperationException: Timeline file already exists: /home/phemarajata/Downloads/bp_bigset/refined_samples_results/reports/timeline.html -- enable the 'timeline.overwrite' option in your config file to overwrite existing files
-	at nextflow.trace.TimelineObserver.onFlowCreate(TimelineObserver.groovy:76)
-	at nextflow.Session$_notifyFlowCreate_lambda40.doCall(Session.groovy:1093)
-	at nextflow.Session.notifyEvent(Session.groovy:1138)
-	at nextflow.Session.notifyFlowCreate(Session.groovy:1093)
-	at nextflow.Session.start(Session.groovy:585)
-	at nextflow.script.ScriptRunner.execute(ScriptRunner.groovy:133)
-	at nextflow.cli.CmdRun.run(CmdRun.groovy:379)
-	at nextflow.cli.Launcher.run(Launcher.groovy:513)
-	at nextflow.cli.Launcher.main(Launcher.groovy:673)
-Jul-07 16:43:13.882 [main] DEBUG nextflow.Session - DAG file already exists: /home/phemarajata/Downloads/bp_bigset/refined_samples_results/reports/pipeline_dag.svg -- enable `dag.overwrite` in your config file to overwrite existing DAG files
-nextflow.exception.AbortOperationException: DAG file already exists: /home/phemarajata/Downloads/bp_bigset/refined_samples_results/reports/pipeline_dag.svg -- enable `dag.overwrite` in your config file to overwrite existing DAG files
+  Process: 2743671@dgx-a100 [192.168.1.11]
+  CPUs: 128 - Mem: 503.7 GB (147.6 GB) - Swap: 0 (0)
+Jul-08 13:04:03.590 [main] DEBUG nextflow.Session - Work-dir: /home/cdcadmin/localpoppunk-final-fixed/work [ext2/ext3]
+Jul-08 13:04:03.590 [main] DEBUG nextflow.Session - Script base path does not exist or is not a directory: /home/cdcadmin/localpoppunk-final-fixed/bin
+Jul-08 13:04:03.600 [main] DEBUG nextflow.executor.ExecutorFactory - Extension executors providers=[]
+Jul-08 13:04:03.608 [main] DEBUG nextflow.Session - Observer factory: DefaultObserverFactory
+Jul-08 13:04:03.690 [main] DEBUG nextflow.cache.CacheFactory - Using Nextflow cache factory: nextflow.cache.DefaultCacheFactory
+Jul-08 13:04:03.700 [main] DEBUG nextflow.util.CustomThreadPool - Creating default thread pool > poolSize: 129; maxThreads: 1000
+Jul-08 13:04:03.753 [main] DEBUG nextflow.Session - Session start
+Jul-08 13:04:03.756 [main] DEBUG nextflow.trace.TraceFileObserver - Workflow started -- trace file: /home/cdcadmin/Downloads/bp_contextual_samples/poppunk_results/reports/dgx_a100_trace.txt
+Jul-08 13:04:04.433 [main] DEBUG nextflow.script.ScriptRunner - > Launching execution
+Jul-08 13:04:04.440 [main] INFO  nextflow.script.BaseScript - ▶ FASTA input directory:  /home/cdcadmin/Downloads/bp_contextual_samples/
+Jul-08 13:04:04.441 [main] INFO  nextflow.script.BaseScript - ▶ Results directory:      /home/cdcadmin/Downloads/bp_contextual_samples/poppunk_results
+Jul-08 13:04:04.442 [main] INFO  nextflow.script.BaseScript - ▶ Threads / RAM:          96  /  400 GB
+Jul-08 13:04:04.453 [main] DEBUG nextflow.script.ScriptRunner - Parsed script files:
+  Script_b153f79f72b8730c: /home/cdcadmin/localpoppunk-final-fixed/poppunk_subsample_snp.nf
+Jul-08 13:04:04.454 [main] DEBUG nextflow.Session - Session aborted -- Cause: =============================================================================
+=                                WARNING                                    =
+= You are running this script using DSL2 syntax, however it does not        = 
+= contain any 'workflow' definition so there's nothing for Nextflow to run. =
+=                                                                           =
+= If this script was written using Nextflow DSL1 syntax, please add the     = 
+= setting 'nextflow.enable.dsl=1' to the nextflow.config file or use the    =
+= command-line option '-dsl1' when running the pipeline.                    =
+=                                                                           =
+= More details at this link: https://www.nextflow.io/docs/latest/dsl2.html  =
+=============================================================================
+
+Jul-08 13:04:04.464 [main] DEBUG nextflow.cli.Launcher - Operation aborted
+nextflow.exception.AbortOperationException: =============================================================================
+=                                WARNING                                    =
+= You are running this script using DSL2 syntax, however it does not        = 
+= contain any 'workflow' definition so there's nothing for Nextflow to run. =
+=                                                                           =
+= If this script was written using Nextflow DSL1 syntax, please add the     = 
+= setting 'nextflow.enable.dsl=1' to the nextflow.config file or use the    =
+= command-line option '-dsl1' when running the pipeline.                    =
+=                                                                           =
+= More details at this link: https://www.nextflow.io/docs/latest/dsl2.html  =
+=============================================================================
+
 	at org.codehaus.groovy.vmplugin.v8.IndyInterface.fromCache(IndyInterface.java:321)
-	at nextflow.trace.GraphObserver.onFlowCreate(GraphObserver.groovy:77)
-	at nextflow.Session$_notifyFlowCreate_lambda40.doCall(Session.groovy:1093)
-	at nextflow.Session.notifyEvent(Session.groovy:1138)
-	at nextflow.Session.notifyFlowCreate(Session.groovy:1093)
-	at nextflow.Session.start(Session.groovy:585)
-	at nextflow.script.ScriptRunner.execute(ScriptRunner.groovy:133)
-	at nextflow.cli.CmdRun.run(CmdRun.groovy:379)
-	at nextflow.cli.Launcher.run(Launcher.groovy:513)
-	at nextflow.cli.Launcher.main(Launcher.groovy:673)
-Jul-07 16:43:14.083 [main] DEBUG nextflow.script.ScriptRunner - Parsed script files:
-Jul-07 16:43:14.094 [main] ERROR nextflow.cli.Launcher - Script compilation error
-- file : /home/phemarajata/Downloads/localpoppunk-final-fixed/poppunk_subsample_snp.nf
-- cause: token recognition error at: '(' @ line 751, column 33.
-           critical_files_missing=$((critical_files_missing + 1))
-                                   ^
-
-1 error
-
-nextflow.exception.ScriptCompilationException: Script compilation error
-- file : /home/phemarajata/Downloads/localpoppunk-final-fixed/poppunk_subsample_snp.nf
-- cause: token recognition error at: '(' @ line 751, column 33.
-           critical_files_missing=$((critical_files_missing + 1))
-                                   ^
-
-1 error
-
-	at nextflow.script.parser.v1.ScriptLoaderV1.parse0(ScriptLoaderV1.groovy:204)
-	at nextflow.script.parser.v1.ScriptLoaderV1.parse(ScriptLoaderV1.groovy:215)
-	at nextflow.script.parser.v1.ScriptLoaderV1.parse(ScriptLoaderV1.groovy)
-	at nextflow.script.ScriptRunner.parseScript(ScriptRunner.groovy:232)
-	at nextflow.script.ScriptRunner.execute(ScriptRunner.groovy:137)
-	at nextflow.cli.CmdRun.run(CmdRun.groovy:379)
-	at nextflow.cli.Launcher.run(Launcher.groovy:513)
-	at nextflow.cli.Launcher.main(Launcher.groovy:673)
-Caused by: org.codehaus.groovy.control.MultipleCompilationErrorsException: startup failed:
-Script_d58816c77ca1dd5b: 751: token recognition error at: '(' @ line 751, column 33.
-           critical_files_missing=$((critical_files_missing + 1))
-                                   ^
-
-1 error
-
-	at org.codehaus.groovy.control.ErrorCollector.failIfErrors(ErrorCollector.java:292)
-	at org.codehaus.groovy.control.ErrorCollector.addFatalError(ErrorCollector.java:148)
-	at org.apache.groovy.parser.antlr4.AstBuilder.collectSyntaxError(AstBuilder.java:4730)
-	at org.apache.groovy.parser.antlr4.AstBuilder.access$100(AstBuilder.java:169)
-	at org.apache.groovy.parser.antlr4.AstBuilder$3.syntaxError(AstBuilder.java:4741)
-	at groovyjarjarantlr4.v4.runtime.ProxyErrorListener.syntaxError(ProxyErrorListener.java:44)
-	at groovyjarjarantlr4.v4.runtime.Lexer.notifyListeners(Lexer.java:381)
-	at groovyjarjarantlr4.v4.runtime.Lexer.nextToken(Lexer.java:145)
-	at groovyjarjarantlr4.v4.runtime.BufferedTokenStream.fetch(BufferedTokenStream.java:170)
-	at groovyjarjarantlr4.v4.runtime.BufferedTokenStream.sync(BufferedTokenStream.java:153)
-	at groovyjarjarantlr4.v4.runtime.BufferedTokenStream.consume(BufferedTokenStream.java:137)
-	at groovyjarjarantlr4.v4.runtime.atn.ParserATNSimulator.execDFA(ParserATNSimulator.java:559)
-	at groovyjarjarantlr4.v4.runtime.atn.ParserATNSimulator.adaptivePredict(ParserATNSimulator.java:408)
-	at groovyjarjarantlr4.v4.runtime.atn.ParserATNSimulator.adaptivePredict(ParserATNSimulator.java:356)
-	at org.apache.groovy.parser.antlr4.GroovyParser.commandExpression(GroovyParser.java:9702)
-	at org.apache.groovy.parser.antlr4.GroovyParser.statementExpression(GroovyParser.java:8233)
-	at org.apache.groovy.parser.antlr4.GroovyParser.statement(GroovyParser.java:7078)
-	at org.apache.groovy.parser.antlr4.GroovyParser.scriptStatement(GroovyParser.java:517)
-	at org.apache.groovy.parser.antlr4.GroovyParser.scriptStatements(GroovyParser.java:427)
-	at org.apache.groovy.parser.antlr4.GroovyParser.compilationUnit(GroovyParser.java:363)
-	at org.apache.groovy.parser.antlr4.AstBuilder.buildCST(AstBuilder.java:243)
-	at org.apache.groovy.parser.antlr4.AstBuilder.buildCST(AstBuilder.java:221)
-	at org.apache.groovy.parser.antlr4.AstBuilder.buildAST(AstBuilder.java:262)
-	at org.apache.groovy.parser.antlr4.Antlr4ParserPlugin.buildAST(Antlr4ParserPlugin.java:58)
-	at org.codehaus.groovy.control.SourceUnit.buildAST(SourceUnit.java:256)
-	at java.base/java.util.Iterator.forEachRemaining(Iterator.java:133)
-	at java.base/java.util.Spliterators$IteratorSpliterator.forEachRemaining(Spliterators.java:1845)
-	at java.base/java.util.stream.ReferencePipeline$Head.forEach(ReferencePipeline.java:762)
-	at org.codehaus.groovy.control.CompilationUnit.compile(CompilationUnit.java:663)
-	at groovy.lang.GroovyClassLoader.doParseClass(GroovyClassLoader.java:365)
-	at groovy.lang.GroovyClassLoader.lambda$parseClass$2(GroovyClassLoader.java:314)
-	at org.codehaus.groovy.runtime.memoize.StampedCommonCache.compute(StampedCommonCache.java:163)
-	at org.codehaus.groovy.runtime.memoize.StampedCommonCache.getAndPut(StampedCommonCache.java:154)
-	at groovy.lang.GroovyClassLoader.parseClass(GroovyClassLoader.java:314)
-	at groovy.lang.GroovyShell.parseClass(GroovyShell.java:572)
-	at groovy.lang.GroovyShell.parse(GroovyShell.java:585)
-	at groovy.lang.GroovyShell.parse(GroovyShell.java:639)
-	at groovy.lang.GroovyShell.parse(GroovyShell.java:643)
-	at nextflow.script.parser.v1.ScriptLoaderV1.parse0(ScriptLoaderV1.groovy:183)
-	... 7 common frames omitted
+	at nextflow.script.BaseScript.run0(BaseScript.groovy:191)
+	at org.codehaus.groovy.vmplugin.v8.IndyInterface.fromCache(IndyInterface.java:321)
+	at nextflow.script.BaseScript.run(BaseScript.groovy:209)
+	at nextflow.script.ScriptParser.runScript(ScriptParser.groovy:236)
+	at nextflow.script.ScriptRunner.run(ScriptRunner.groovy:243)
+	at nextflow.script.ScriptRunner.execute(ScriptRunner.groovy:138)
+	at nextflow.cli.CmdRun.run(CmdRun.groovy:372)
+	at nextflow.cli.Launcher.run(Launcher.groovy:503)
+	at nextflow.cli.Launcher.main(Launcher.groovy:657)

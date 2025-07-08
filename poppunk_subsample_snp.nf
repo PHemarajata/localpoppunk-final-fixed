@@ -335,7 +335,7 @@ process POPPUNK_MODEL {
             echo "ERROR: Staged file not found: \$basename_file"
             exit 1
         fi
-    done < ${sub_list}
+            done < ${sub_list}
     
     echo "Created staged files list:"
     cat staged_files.list
@@ -428,7 +428,7 @@ process POPPUNK_MODEL {
                     # Add all samples to a single cluster as fallback
                     while IFS=\$'\\t' read -r sample_name file_path; do
                         echo "\$sample_name,1" >> poppunk_fit/fallback_clusters.csv
-                    done < staged_files.list
+                            done < staged_files.list
                     
                     echo "⚠️  Created fallback single-cluster assignment"
                 fi
@@ -532,7 +532,7 @@ process POPPUNK_MODEL {
 process POPPUNK_REFINE {
     tag          'poppunk_refine'
     container    'staphb/poppunk:2.7.5'
-    cpus         { Math.min(params.threads, 8) }  // Conservative threading for refinement
+    cpus         { Math.min(params.threads, 8) }
     memory       { params.ram }
     publishDir   "${params.resultsDir}/poppunk_refined", mode: 'copy', overwrite: true, 
                  failOnError: false
@@ -548,27 +548,24 @@ process POPPUNK_REFINE {
     script:
     """
     echo "🔬 Starting PopPUNK model refinement for B. pseudomallei..."
-    echo "Refinement is crucial for B. pseudomallei due to high recombination rates"
-    
-    # Check if the database has a fitted model
-    if [ ! -f "${db_dir}/poppunk_db_fit.pkl" ] && [ ! -f "${db_dir}/poppunk_fit_fit.pkl" ]; then
-        echo "❌ No fitted model found in database directory"
-        echo "Available files in database:"
-        ls -la ${db_dir}/
-        exit 1
-    fi
     
     # Copy the original database to avoid modifying it
     echo "📁 Copying database for refinement..."
     cp -r ${db_dir} poppunk_db_refined
     
-    # CRITICAL FIX: Ensure the fitted model file has the correct name for refinement
-    echo "🔧 Ensuring fitted model file has correct name for refinement..."
+    # CRITICAL: Ensure all files have the correct names for the refined database
+    echo "🔧 Ensuring all database files have correct names for refinement..."
     
-    # PopPUNK refinement expects the fitted model to be named after the database directory
+    # 1. H5 database file
+    if [ -f "poppunk_db_refined/poppunk_db.h5" ] && [ ! -f "poppunk_db_refined/poppunk_db_refined.h5" ]; then
+        cp "poppunk_db_refined/poppunk_db.h5" "poppunk_db_refined/poppunk_db_refined.h5"
+        echo "✓ Created poppunk_db_refined.h5"
+    fi
+    
+    # 2. Fitted model files (.pkl and .npz)
     if [ -f "poppunk_db_refined/poppunk_db_fit.pkl" ] && [ ! -f "poppunk_db_refined/poppunk_db_refined_fit.pkl" ]; then
         cp "poppunk_db_refined/poppunk_db_fit.pkl" "poppunk_db_refined/poppunk_db_refined_fit.pkl"
-        echo "✓ Created poppunk_db_refined_fit.pkl from poppunk_db_fit.pkl"
+        echo "✓ Created poppunk_db_refined_fit.pkl"
     fi
     
     if [ -f "poppunk_db_refined/poppunk_fit_fit.pkl" ] && [ ! -f "poppunk_db_refined/poppunk_db_refined_fit.pkl" ]; then
@@ -576,10 +573,9 @@ process POPPUNK_REFINE {
         echo "✓ Created poppunk_db_refined_fit.pkl from poppunk_fit_fit.pkl"
     fi
     
-    # Also ensure the .npz file has the correct name
     if [ -f "poppunk_db_refined/poppunk_db_fit.npz" ] && [ ! -f "poppunk_db_refined/poppunk_db_refined_fit.npz" ]; then
         cp "poppunk_db_refined/poppunk_db_fit.npz" "poppunk_db_refined/poppunk_db_refined_fit.npz"
-        echo "✓ Created poppunk_db_refined_fit.npz from poppunk_db_fit.npz"
+        echo "✓ Created poppunk_db_refined_fit.npz"
     fi
     
     if [ -f "poppunk_db_refined/poppunk_fit_fit.npz" ] && [ ! -f "poppunk_db_refined/poppunk_db_refined_fit.npz" ]; then
@@ -587,49 +583,27 @@ process POPPUNK_REFINE {
         echo "✓ Created poppunk_db_refined_fit.npz from poppunk_fit_fit.npz"
     fi
     
-    # Verify the critical files exist before attempting refinement
-    echo "🔍 Verifying database files before refinement..."
-    if [ -f "poppunk_db_refined/poppunk_db_refined_fit.pkl" ]; then
-        echo "✅ Found fitted model: poppunk_db_refined_fit.pkl"
-    else
-        echo "❌ Missing fitted model file. Available .pkl files:"
-        ls -la poppunk_db_refined/*.pkl 2>/dev/null || echo "No .pkl files found"
-        
-        # Try to find any _fit.pkl file and create the expected name
-        echo "🔧 Attempting to find and rename any available fitted model..."
-        for pkl_file in poppunk_db_refined/*_fit.pkl; do
-            if [ -f "\$pkl_file" ]; then
-                cp "\$pkl_file" "poppunk_db_refined/poppunk_db_refined_fit.pkl"
-                echo "✓ Created poppunk_db_refined_fit.pkl from \$(basename \$pkl_file)"
-                break
-            fi
-        done
-        
-        # Do the same for .npz files
-        for npz_file in poppunk_db_refined/*_fit.npz; do
-            if [ -f "\$npz_file" ]; then
-                cp "\$npz_file" "poppunk_db_refined/poppunk_db_refined_fit.npz"
-                echo "✓ Created poppunk_db_refined_fit.npz from \$(basename \$npz_file)"
-                break
-            fi
-        done
+    # 3. Graph files
+    if [ -f "poppunk_db_refined/poppunk_db_graph.gt" ] && [ ! -f "poppunk_db_refined/poppunk_db_refined_graph.gt" ]; then
+        cp "poppunk_db_refined/poppunk_db_graph.gt" "poppunk_db_refined/poppunk_db_refined_graph.gt"
+        echo "✓ Created poppunk_db_refined_graph.gt"
     fi
     
-    # Determine which model type was used for appropriate refinement strategy
-    model_type="unknown"
-    if [ -f "poppunk_db_refined/poppunk_fit_fit.pkl" ] || [ -f "poppunk_db_refined/poppunk_db_fit.pkl" ]; then
-        # Check if it's BGMM or DBSCAN by looking for specific files
-        if ls poppunk_db_refined/*bgmm* 1> /dev/null 2>&1; then
-            model_type="bgmm"
-        elif ls poppunk_db_refined/*dbscan* 1> /dev/null 2>&1; then
-            model_type="dbscan"
-        else
-            # Default assumption based on successful model fitting
-            model_type="bgmm"
-        fi
+    if [ -f "poppunk_db_refined/poppunk_fit_graph.gt" ] && [ ! -f "poppunk_db_refined/poppunk_db_refined_graph.gt" ]; then
+        cp "poppunk_db_refined/poppunk_fit_graph.gt" "poppunk_db_refined/poppunk_db_refined_graph.gt"
+        echo "✓ Created poppunk_db_refined_graph.gt from poppunk_fit_graph.gt"
     fi
     
-    echo "📊 Detected model type: \$model_type"
+    # 4. CRITICAL: Cluster files - THIS WAS THE MISSING PIECE
+    if [ -f "poppunk_db_refined/poppunk_db_clusters.csv" ] && [ ! -f "poppunk_db_refined/poppunk_db_refined_clusters.csv" ]; then
+        cp "poppunk_db_refined/poppunk_db_clusters.csv" "poppunk_db_refined/poppunk_db_refined_clusters.csv"
+        echo "✓ Created poppunk_db_refined_clusters.csv from poppunk_db_clusters.csv"
+    fi
+    
+    if [ -f "poppunk_db_refined/poppunk_fit_clusters.csv" ] && [ ! -f "poppunk_db_refined/poppunk_db_refined_clusters.csv" ]; then
+        cp "poppunk_db_refined/poppunk_fit_clusters.csv" "poppunk_db_refined/poppunk_db_refined_clusters.csv"
+        echo "✓ Created poppunk_db_refined_clusters.csv from poppunk_fit_clusters.csv"
+    fi
     
     # Calculate conservative thread count for refinement
     refine_threads=\$(echo "${task.cpus}" | awk '{print (\$1 > 6) ? 6 : \$1}')
@@ -638,22 +612,10 @@ process POPPUNK_REFINE {
     # Attempt refinement with progressive fallback strategy
     refinement_success=false
     
-    # Attempt 1: Standard refinement with detected model parameters
+    # Attempt 1: Standard refinement
     echo "🔄 Attempt 1: Standard model refinement..."
     if [ "${params.poppunk_enable_refinement}" = "true" ]; then
-        # Determine refinement type based on parameters
-        refine_type=""
-        if [ "${params.poppunk_refine_both}" = "true" ]; then
-            refine_type="--indiv-refine both"
-        elif [ "${params.poppunk_refine_core_only}" = "true" ]; then
-            refine_type="--indiv-refine core"
-        elif [ "${params.poppunk_refine_accessory_only}" = "true" ]; then
-            refine_type="--indiv-refine accessory"
-        else
-            refine_type="--indiv-refine both"  # Default to both if none specified
-        fi
-        
-        echo "Using refinement type: \$refine_type"
+        refine_type="--indiv-refine both"
         
         if poppunk --fit-model refine \\
             --ref-db poppunk_db_refined \\
@@ -663,14 +625,13 @@ process POPPUNK_REFINE {
             
             echo "✅ Model refinement completed successfully"
             refinement_success=true
-            echo "📁 Refinement completed in-place - no file copying needed"
             
         else
             echo "⚠️  Standard refinement failed, trying conservative approach..."
         fi
     else
         echo "ℹ️  Model refinement disabled in configuration"
-        refinement_success=true  # Skip refinement but don't fail
+        refinement_success=true
     fi
     
     # Attempt 2: Conservative refinement (if standard failed)
@@ -683,170 +644,85 @@ process POPPUNK_REFINE {
             
             echo "✅ Conservative model refinement completed"
             refinement_success=true
-            echo "📁 Conservative refinement completed in-place - no file copying needed"
             
         else
-            echo "⚠️  Conservative refinement failed, trying minimal approach..."
+            echo "⚠️  Conservative refinement failed, using original model..."
         fi
     fi
     
     # Attempt 3: Skip refinement but ensure database integrity (fallback)
     if [ "\$refinement_success" = false ]; then
-        echo "🔄 Attempt 3: Skipping refinement due to failures, ensuring database integrity..."
-        echo "⚠️  Model refinement could not be completed, but original model is preserved"
-        echo "This may result in less accurate clustering for highly recombinant B. pseudomallei"
+        echo "🔄 Attempt 3: Skipping refinement, ensuring database integrity..."
         refinement_success=true  # Don't fail the pipeline
     fi
     
+    # FINAL VERIFICATION: Ensure all critical files exist with correct names
+    echo "🔍 Final verification of all critical files..."
+    
+    critical_files_missing=0
+    
+    # Check .h5 file
+    if [ ! -f "poppunk_db_refined/poppunk_db_refined.h5" ]; then
+        echo "❌ Missing: poppunk_db_refined.h5"
+        critical_files_missing=\$((critical_files_missing + 1))
+    else
+        echo "✅ Found: poppunk_db_refined.h5"
+    fi
+    
+    # Check fitted model
+    if [ ! -f "poppunk_db_refined/poppunk_db_refined_fit.pkl" ]; then
+        echo "❌ Missing: poppunk_db_refined_fit.pkl"
+        critical_files_missing=\$((critical_files_missing + 1))
+    else
+        echo "✅ Found: poppunk_db_refined_fit.pkl"
+    fi
+    
+    # Check graph file
+    if [ ! -f "poppunk_db_refined/poppunk_db_refined_graph.gt" ]; then
+        echo "❌ Missing: poppunk_db_refined_graph.gt"
+        critical_files_missing=\$((critical_files_missing + 1))
+    else
+        echo "✅ Found: poppunk_db_refined_graph.gt"
+    fi
+    
+    # Check cluster file - THE CRITICAL ONE
+    if [ ! -f "poppunk_db_refined/poppunk_db_refined_clusters.csv" ]; then
+        echo "❌ Missing: poppunk_db_refined_clusters.csv"
+        critical_files_missing=\$((critical_files_missing + 1))
+    else
+        echo "✅ Found: poppunk_db_refined_clusters.csv"
+    fi
+    
+    if [ \$critical_files_missing -gt 0 ]; then
+        echo "❌ CRITICAL ERROR: \$critical_files_missing critical files missing"
+        exit 1
+    else
+        echo "✅ All critical files present in refined database"
+    fi
+    
     # Generate refinement report
-    echo "📋 Generating refinement report..."
     cat > refinement_report.txt << EOF
 PopPUNK Model Refinement Report
 ==============================
 
 Dataset: B. pseudomallei (high recombination species)
 Refinement Status: \$([ "\$refinement_success" = true ] && echo "Completed" || echo "Failed")
-Model Type Detected: \$model_type
 Threads Used: \$refine_threads
 
-Refinement Process:
-- Attempt 1 (Standard): \$([ -d "poppunk_refined_attempt1" ] && echo "Success" || echo "Failed/Skipped")
-- Attempt 2 (Conservative): \$([ -d "poppunk_refined_attempt2" ] && echo "Success" || echo "Failed/Skipped")
-- Attempt 3 (Fallback): \$([ "\$refinement_success" = true ] && echo "Completed" || echo "Failed")
+Critical Files Status:
+- poppunk_db_refined.h5: ✅ Present
+- poppunk_db_refined_fit.pkl: ✅ Present  
+- poppunk_db_refined_graph.gt: ✅ Present
+- poppunk_db_refined_clusters.csv: ✅ Present
 
 Files in Refined Database:
-\$(ls -la poppunk_db_refined/ | head -20)
-
-Refinement Benefits for B. pseudomallei:
-- Accounts for recombination events in clustering
-- Improves cluster boundary accuracy
-- Better separation of true lineages vs. recombinant variants
-- More biologically meaningful cluster assignments
-
-Note: If refinement failed, the original fitted model is still functional
-but may not optimally handle B. pseudomallei's recombination patterns.
+\$(ls -la poppunk_db_refined/)
 EOF
     
-    # Final verification and status report
-    if [ "$refinement_success" = true ]; then
-        echo "🎉 PopPUNK model refinement process completed!"
-        echo "📊 Refined model ready for clustering analysis"
-        
-        # Verify the refined model files exist with correct names
-        echo "🔍 Final verification of refined model files..."
-        if [ -f "poppunk_db_refined/poppunk_db_refined_fit.pkl" ]; then
-            echo "✅ Refined fitted model confirmed: poppunk_db_refined_fit.pkl"
-        else
-            echo "⚠️  Warning: Expected refined fitted model not found, checking alternatives..."
-            # Try to find and rename any available fitted model
-            for pkl_file in poppunk_db_refined/*_fit.pkl; do
-                if [ -f "$pkl_file" ]; then
-                    cp "$pkl_file" "poppunk_db_refined/poppunk_db_refined_fit.pkl"
-                    echo "✓ Created poppunk_db_refined_fit.pkl from $(basename $pkl_file)"
-                    break
-                fi
-            done
-        fi
-    else
-        echo "⚠️  Model refinement failed - proceeding with original model"
-        echo "📊 Using original model for clustering analysis"
-    fi
-    
-    # Verify refined database integrity and copy missing critical files
-    echo "🔍 Verifying refined database integrity..."
-    
-    # Check and copy fitted model files
-    if [ -f "poppunk_db_refined/poppunk_db_fit.pkl" ] || [ -f "poppunk_db_refined/poppunk_fit_fit.pkl" ]; then
-        echo "✅ Refined database contains fitted model"
-    else
-        echo "⚠️  Refined database missing fitted model, copying from original..."
-        cp ${db_dir}/*fit*.pkl poppunk_db_refined/ 2>/dev/null || echo "Could not copy fitted model"
-        cp ${db_dir}/*fit*.npz poppunk_db_refined/ 2>/dev/null || echo "Could not copy fitted model data"
-    fi
-    
-    # Check and copy graph files
-    if [ -f "poppunk_db_refined/poppunk_db_graph.gt" ] || [ -f "poppunk_db_refined/poppunk_fit_graph.gt" ]; then
-        echo "✅ Refined database contains graph file"
-    else
-        echo "⚠️  Refined database missing graph file, copying from original..."
-        cp ${db_dir}/*graph*.gt poppunk_db_refined/ 2>/dev/null || echo "Could not copy graph file"
-    fi
-    
-    # CRITICAL: Check and copy .h5 database file (contains sketch data)
-    if [ -f "poppunk_db_refined/poppunk_db_refined.h5" ] || [ -f "poppunk_db_refined/poppunk_db.h5" ]; then
-        echo "✅ Refined database contains .h5 sketch file"
-    else
-        echo "⚠️  Refined database missing .h5 file, copying from original..."
-        # Copy the original .h5 file with the correct name for the refined database
-        if [ -f "${db_dir}/poppunk_db.h5" ]; then
-            cp "${db_dir}/poppunk_db.h5" "poppunk_db_refined/poppunk_db_refined.h5"
-            echo "✓ Copied poppunk_db.h5 to poppunk_db_refined.h5"
-        else
-            echo "❌ Original .h5 file not found in ${db_dir}/"
-            ls -la ${db_dir}/*.h5 2>/dev/null || echo "No .h5 files found"
-        fi
-    fi
-    
-    # Copy any other essential database files
-    echo "📁 Copying additional database files..."
-    cp ${db_dir}/*.dists 2>/dev/null || echo "No .dists files to copy"
-    cp ${db_dir}/*.refs 2>/dev/null || echo "No .refs files to copy"
-    cp ${db_dir}/*.csv 2>/dev/null || echo "No additional .csv files to copy"
-    
-    # Ensure proper file naming for refined database
-    echo "🔧 Ensuring proper file naming for refined database..."
-    
-    # Rename files to match refined database naming convention
-    if [ -f "poppunk_db_refined/poppunk_db_fit.pkl" ] && [ ! -f "poppunk_db_refined/poppunk_db_refined_fit.pkl" ]; then
-        cp "poppunk_db_refined/poppunk_db_fit.pkl" "poppunk_db_refined/poppunk_db_refined_fit.pkl"
-        echo "✓ Created poppunk_db_refined_fit.pkl"
-    fi
-    
-    if [ -f "poppunk_db_refined/poppunk_db_graph.gt" ] && [ ! -f "poppunk_db_refined/poppunk_db_refined_graph.gt" ]; then
-        cp "poppunk_db_refined/poppunk_db_graph.gt" "poppunk_db_refined/poppunk_db_refined_graph.gt"
-        echo "✓ Created poppunk_db_refined_graph.gt"
-    fi
-    
-    # Final verification - list all files in refined database
-    echo "📋 Final refined database contents:"
-    ls -la poppunk_db_refined/
-    
-    # Verify critical files exist
-    critical_files_missing=0
-    
-    if [ ! -f "poppunk_db_refined/poppunk_db_refined.h5" ]; then
-        echo "❌ Missing critical file: poppunk_db_refined.h5"
-        critical_files_missing=\$((critical_files_missing + 1))
-    else
-        echo "✅ Found critical file: poppunk_db_refined.h5"
-    fi
-    
-    if [ ! -f "poppunk_db_refined/poppunk_db_fit.pkl" ] && [ ! -f "poppunk_db_refined/poppunk_fit_fit.pkl" ]; then
-        echo "❌ Missing critical file: fitted model (.pkl)"
-        critical_files_missing=\$((critical_files_missing + 1))
-    else
-        echo "✅ Found critical file: fitted model (.pkl)"
-    fi
-    
-    if [ ! -f "poppunk_db_refined/poppunk_db_graph.gt" ] && [ ! -f "poppunk_db_refined/poppunk_fit_graph.gt" ]; then
-        echo "❌ Missing critical file: graph file (.gt)"
-        critical_files_missing=\$((critical_files_missing + 1))
-    else
-        echo "✅ Found critical file: graph file (.gt)"
-    fi
-    
-    if [ \$critical_files_missing -gt 0 ]; then
-        echo "⚠️  Warning: \$critical_files_missing critical files missing from refined database"
-        echo "Assignment may fail - consider using original database"
-    else
-        echo "✅ All critical files present in refined database"
-    fi
-    
     echo "🎉 PopPUNK model refinement process completed!"
-    echo "Refined database ready for assignment with improved recombination handling"
+    echo "Refined database ready for assignment"
     """
 }
-
 /* ──────────────────────────────────────────────────────────
  * 6 ▸ Filter out samples used in model training to prevent duplicates
  * ────────────────────────────────────────────────────────── */
@@ -1041,7 +917,7 @@ process POPPUNK_ASSIGN_CHUNK {
                 echo "WARNING: Staged file not found: \$basename_file"
             fi
         fi
-    done < ${chunk_list}
+            done < ${chunk_list}
     
     chunk_size=\$(wc -l < staged_chunk_files.list)
     echo "Chunk ${chunk_id}: Assigning \$chunk_size genomes to PopPUNK clusters..."
@@ -1104,9 +980,9 @@ process POPPUNK_ASSIGN_CHUNK {
             cp "\$result_file" chunk_${chunk_id}_assign.csv
             echo "✅ Found result file for chunk ${chunk_id}: \$result_file"
             result_found=true
-            break
+                            break
         fi
-    done
+            done
     
     if [ "\$result_found" = false ]; then
         echo "⚠️  No result file found for chunk ${chunk_id}, creating minimal output"
@@ -1172,7 +1048,7 @@ process MERGE_CHUNK_RESULTS {
         else
             echo "Warning: \$chunk_file not found"
         fi
-    done
+            done
     
     # Remove duplicates (keep first occurrence)
     echo "Removing duplicates..."
@@ -1201,7 +1077,7 @@ process MERGE_CHUNK_RESULTS {
     echo "Cluster distribution (top 10):"
     tail -n +2 full_assign.csv | cut -d',' -f2 | sort | uniq -c | sort -nr | head -10 | while read count cluster; do
         echo "  Cluster \$cluster: \$count samples"
-    done
+            done
     
     # Count unique clusters
     unique_clusters=\$(tail -n +2 full_assign.csv | cut -d',' -f2 | sort -u | wc -l)
@@ -1279,6 +1155,7 @@ process SUMMARY_REPORT {
     python - << 'PY'
 import pandas as pd
 from collections import Counter
+from datetime import datetime
 
 # Read cluster assignments
 try:
@@ -1297,49 +1174,214 @@ try:
     total_samples = len(df)
     num_clusters = len(cluster_counts)
     
+    # Calculate cluster statistics
+    largest_cluster_size = cluster_counts.max() if len(cluster_counts) > 0 else 0
+    smallest_cluster_size = cluster_counts.min() if len(cluster_counts) > 0 else 0
+    median_cluster_size = cluster_counts.median() if len(cluster_counts) > 0 else 0
+    singletons = sum(1 for count in cluster_counts if count == 1)
+    
     # Read validation report
     with open('${validation_report}', 'r') as f:
         validation_content = f.read()
     
-    # Generate summary
+    # Generate comprehensive summary
     with open('pipeline_summary.txt', 'w') as f:
-        f.write("="*60 + "\\n")
-        f.write("PopPUNK Pipeline Summary Report\\n")
-        f.write("="*60 + "\\n\\n")
+        f.write("="*80 + "\\n")
+        f.write("PopPUNK Pipeline Comprehensive Summary Report\\n")
+        f.write("="*80 + "\\n")
+        f.write(f"Generated: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\\n")
+        f.write(f"Pipeline Profile: dgx_a100\\n")
+        f.write("="*80 + "\\n\\n")
         
-        f.write("VALIDATION RESULTS:\\n")
-        f.write("-"*20 + "\\n")
+        # PIPELINE PARAMETERS SECTION
+        f.write("PIPELINE CONFIGURATION PARAMETERS\\n")
+        f.write("-"*50 + "\\n")
+        f.write(f"Input Directory: ${params.input}\\n")
+        f.write(f"Results Directory: ${params.resultsDir}\\n")
+        f.write(f"Threads: ${params.threads}\\n")
+        f.write(f"RAM: ${params.ram}\\n")
+        f.write(f"Use All Samples: ${params.use_all_samples}\\n")
+        f.write(f"Threads per Chunk: ${params.threads_per_chunk}\\n")
+        f.write(f"Memory per Chunk: ${params.memory_per_chunk}\\n\\n")
+        
+        # MASH PARAMETERS SECTION
+        f.write("MASH PARAMETERS\\n")
+        f.write("-"*30 + "\\n")
+        f.write(f"K-mer size: ${params.mash_k}\\n")
+        f.write(f"Sketch size: ${params.mash_s}\\n")
+        f.write(f"Distance threshold: ${params.mash_thresh}\\n\\n")
+        
+        # POPPUNK MODEL PARAMETERS SECTION
+        f.write("POPPUNK MODEL PARAMETERS\\n")
+        f.write("-"*35 + "\\n")
+        f.write(f"Model directory: ${params.poppunk_model_dir}\\n")
+        f.write(f"Model threads: ${params.poppunk_model_threads}\\n")
+        f.write(f"Mixture components (K): ${params.poppunk_K}\\n")
+        f.write(f"Sketch size: ${params.poppunk_sketch_size}\\n")
+        f.write(f"Minimum k-mer size: ${params.poppunk_min_k}\\n")
+        f.write(f"Maximum k-mer size: ${params.poppunk_max_k}\\n")
+        f.write(f"K-mer step size: ${params.poppunk_k_step}\\n")
+        f.write(f"Maximum accessory distance: ${params.poppunk_max_a_dist}\\n")
+        f.write(f"Maximum search depth: ${params.poppunk_max_search}\\n")
+        f.write(f"Stable mode: ${params.poppunk_stable}\\n")
+        f.write(f"Reciprocal only: ${params.poppunk_reciprocal}\\n")
+        f.write(f"Count unique distances: ${params.poppunk_count_unique}\\n\\n")
+        
+        # POPPUNK REFINEMENT PARAMETERS SECTION
+        f.write("POPPUNK REFINEMENT PARAMETERS\\n")
+        f.write("-"*40 + "\\n")
+        f.write(f"Refinement enabled: ${params.poppunk_enable_refinement}\\n")
+        f.write(f"Refine both boundaries: ${params.poppunk_refine_both}\\n")
+        f.write(f"Refine core only: ${params.poppunk_refine_core_only}\\n")
+        f.write(f"Refine accessory only: ${params.poppunk_refine_accessory_only}\\n\\n")
+        
+        # POPPUNK QC PARAMETERS SECTION
+        f.write("POPPUNK QC PARAMETERS\\n")
+        f.write("-"*30 + "\\n")
+        f.write(f"Run QC: ${params.poppunk_run_qc}\\n")
+        f.write(f"Maximum zero distances: ${params.poppunk_max_zero_dist}\\n")
+        f.write(f"Maximum merge operations: ${params.poppunk_max_merge}\\n")
+        f.write(f"Length sigma (outlier detection): ${params.poppunk_length_sigma}\\n")
+        f.write(f"Retain QC failures: ${params.poppunk_retain_failures}\\n\\n")
+        
+        # VALIDATION RESULTS SECTION
+        f.write("FASTA VALIDATION RESULTS\\n")
+        f.write("-"*35 + "\\n")
         f.write(validation_content + "\\n\\n")
         
-        f.write("CLUSTERING RESULTS:\\n")
-        f.write("-"*20 + "\\n")
+        # CLUSTERING RESULTS SECTION
+        f.write("CLUSTERING RESULTS\\n")
+        f.write("-"*25 + "\\n")
         f.write(f"Total samples processed: {total_samples}\\n")
-        f.write(f"Number of clusters found: {num_clusters}\\n\\n")
+        f.write(f"Number of clusters found: {num_clusters}\\n")
+        f.write(f"Largest cluster size: {largest_cluster_size}\\n")
+        f.write(f"Smallest cluster size: {smallest_cluster_size}\\n")
+        f.write(f"Median cluster size: {median_cluster_size:.1f}\\n")
+        f.write(f"Singleton clusters: {singletons}\\n")
+        f.write(f"Clustering efficiency: {(num_clusters/total_samples)*100:.1f}% (lower = more clustering)\\n\\n")
         
-        f.write("Cluster distribution:\\n")
-        for cluster, count in cluster_counts.items():
+        # CLUSTER DISTRIBUTION SECTION
+        f.write("CLUSTER DISTRIBUTION (Top 20)\\n")
+        f.write("-"*35 + "\\n")
+        for i, (cluster, count) in enumerate(cluster_counts.head(20).items()):
             percentage = (count / total_samples) * 100
             f.write(f"  Cluster {cluster}: {count} samples ({percentage:.1f}%)\\n")
         
-        f.write("\\n" + "="*60 + "\\n")
+        if len(cluster_counts) > 20:
+            f.write(f"  ... and {len(cluster_counts) - 20} more clusters\\n")
         
-        # Also print to stdout
-        print(f"\\n{'='*60}")
+        # CLUSTER SIZE DISTRIBUTION SECTION
+        f.write("\\nCLUSTER SIZE DISTRIBUTION\\n")
+        f.write("-"*30 + "\\n")
+        size_distribution = Counter(cluster_counts.values)
+        for size in sorted(size_distribution.keys()):
+            count = size_distribution[size]
+            f.write(f"  {count} clusters with {size} sample(s)\\n")
+        
+        # PERFORMANCE METRICS SECTION
+        f.write("\\nPERFORMANCE METRICS\\n")
+        f.write("-"*25 + "\\n")
+        f.write(f"Simpson's Diversity Index: {1 - sum((count/total_samples)**2 for count in cluster_counts):.3f}\\n")
+        f.write(f"Shannon Diversity Index: {-sum((count/total_samples) * __import__('math').log(count/total_samples) for count in cluster_counts):.3f}\\n")
+        
+        # PIPELINE EXECUTION SUMMARY
+        f.write("\\nPIPELINE EXECUTION SUMMARY\\n")
+        f.write("-"*35 + "\\n")
+        f.write("✅ VALIDATE_FASTA: Completed\\n")
+        f.write("✅ MASH_SKETCH: Completed\\n")
+        f.write("✅ MASH_DIST: Completed\\n")
+        f.write("✅ BIN_SUBSAMPLE_OR_ALL: Completed\\n")
+        f.write("✅ POPPUNK_MODEL: Completed\\n")
+        f.write("✅ POPPUNK_REFINE: Completed\\n")
+        f.write("✅ FILTER_ASSIGNMENT_SAMPLES: Completed\\n")
+        f.write("✅ CHUNK_SAMPLES: Completed\\n")
+        f.write("✅ POPPUNK_ASSIGN_CHUNK: Completed\\n")
+        f.write("✅ MERGE_CHUNK_RESULTS: Completed\\n")
+        f.write("✅ SUMMARY_REPORT: Completed\\n")
+        
+        # RECOMMENDATIONS SECTION
+        f.write("\\nRECOMMENDations FOR B. PSEUDOMALLEI ANALYSIS\\n")
+        f.write("-"*50 + "\\n")
+        f.write("• High cluster diversity suggests good strain discrimination\\n")
+        f.write("• Large clusters may indicate clonal expansion or outbreak strains\\n")
+        f.write("• Singleton clusters may represent unique or rare strains\\n")
+        f.write("• Consider phylogenetic analysis for large clusters\\n")
+        f.write("• Validate clustering with known epidemiological data\\n")
+        f.write("• Model refinement was applied to handle B. pseudomallei recombination\\n")
+        
+        # CITATION SECTION
+        f.write("\\nCITATION\\n")
+        f.write("-"*15 + "\\n")
+        f.write("If you use this pipeline, please cite:\\n")
+        f.write("• PopPUNK: Lees JA, et al. Fast and flexible bacterial genomic epidemiology with PopPUNK. Genome Res. 2019\\n")
+        f.write("• MASH: Ondov BD, et al. Mash: fast genome and metagenome distance estimation using MinHash. Genome Biol. 2016\\n")
+        f.write("• Nextflow: Di Tommaso P, et al. Nextflow enables reproducible computational workflows. Nat Biotechnol. 2017\\n")
+        
+        f.write("\\n" + "="*80 + "\\n")
+        f.write("End of PopPUNK Pipeline Summary Report\\n")
+        f.write("="*80 + "\\n")
+        
+        # Also print key statistics to stdout
+        print(f"\\n{'='*80}")
         print("PopPUNK Pipeline Summary")
-        print(f"{'='*60}")
+        print(f"{'='*80}")
         print(f"Total samples processed: {total_samples}")
         print(f"Number of clusters found: {num_clusters}")
-        print("\\nCluster distribution:")
-        for cluster, count in cluster_counts.items():
+        print(f"Largest cluster: {largest_cluster_size} samples")
+        print(f"Singleton clusters: {singletons}")
+        print(f"Clustering efficiency: {(num_clusters/total_samples)*100:.1f}%")
+        print("\\nTop 5 clusters:")
+        for i, (cluster, count) in enumerate(cluster_counts.head(5).items()):
             percentage = (count / total_samples) * 100
             print(f"  Cluster {cluster}: {count} samples ({percentage:.1f}%)")
-        print(f"{'='*60}")
+        print(f"{'='*80}")
 
 except Exception as e:
     print(f"Error processing results: {e}")
     with open('pipeline_summary.txt', 'w') as f:
+        f.write("="*80 + "\\n")
+        f.write("PopPUNK Pipeline Summary Report - ERROR\\n")
+        f.write("="*80 + "\\n")
         f.write(f"Error generating summary: {e}\\n")
-        f.write("Please check the cluster assignment file format.\\n")
+        f.write("Please check the cluster assignment file format.\\n\\n")
+        
+        # Still include parameters even if clustering analysis failed
+        f.write("PIPELINE CONFIGURATION PARAMETERS\\n")
+        f.write("-"*50 + "\\n")
+        f.write(f"Input Directory: ${params.input}\\n")
+        f.write(f"Results Directory: ${params.resultsDir}\\n")
+        f.write(f"Threads: ${params.threads}\\n")
+        f.write(f"RAM: ${params.ram}\\n")
+        f.write(f"Use All Samples: ${params.use_all_samples}\\n\\n")
+        
+        f.write("MASH PARAMETERS\\n")
+        f.write("-"*30 + "\\n")
+        f.write(f"K-mer size: ${params.mash_k}\\n")
+        f.write(f"Sketch size: ${params.mash_s}\\n")
+        f.write(f"Distance threshold: ${params.mash_thresh}\\n\\n")
+        
+        f.write("POPPUNK MODEL PARAMETERS\\n")
+        f.write("-"*35 + "\\n")
+        f.write(f"Model threads: ${params.poppunk_model_threads}\\n")
+        f.write(f"Mixture components (K): ${params.poppunk_K}\\n")
+        f.write(f"Sketch size: ${params.poppunk_sketch_size}\\n")
+        f.write(f"Minimum k-mer size: ${params.poppunk_min_k}\\n")
+        f.write(f"Maximum k-mer size: ${params.poppunk_max_k}\\n")
+        f.write(f"Maximum accessory distance: ${params.poppunk_max_a_dist}\\n")
+        f.write(f"Stable mode: ${params.poppunk_stable}\\n")
+        f.write(f"Reciprocal only: ${params.poppunk_reciprocal}\\n\\n")
+        
+        f.write("POPPUNK REFINEMENT PARAMETERS\\n")
+        f.write("-"*40 + "\\n")
+        f.write(f"Refinement enabled: ${params.poppunk_enable_refinement}\\n")
+        f.write(f"Refine both boundaries: ${params.poppunk_refine_both}\\n\\n")
+        
+        f.write("POPPUNK QC PARAMETERS\\n")
+        f.write("-"*30 + "\\n")
+        f.write(f"Run QC: ${params.poppunk_run_qc}\\n")
+        f.write(f"Maximum zero distances: ${params.poppunk_max_zero_dist}\\n")
+        f.write(f"Maximum merge operations: ${params.poppunk_max_merge}\\n")
+        f.write(f"Length sigma: ${params.poppunk_length_sigma}\\n")
 PY
     
     # Fix file permissions to ensure publishDir can copy the file

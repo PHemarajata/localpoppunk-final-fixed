@@ -1,111 +1,616 @@
-Jul-07 18:13:57.821 [main] DEBUG nextflow.cli.Launcher - $> nextflow run poppunk_subsample_snp.nf -profile large_dataset_optimized --input /home/phemarajata/Downloads/bp_bigset/ --resultsDir /home/phemarajata/Downloads/bp_bigset/refined_samples_results --use_all_samples false -resume
-Jul-07 18:13:57.887 [main] DEBUG nextflow.cli.CmdRun - N E X T F L O W  ~  version 25.04.4
-Jul-07 18:13:57.902 [main] DEBUG nextflow.plugin.PluginsFacade - Setting up plugin manager > mode=prod; embedded=false; plugins-dir=/home/phemarajata/.nextflow/plugins; core-plugins: nf-amazon@2.15.0,nf-azure@1.16.0,nf-cloudcache@0.4.3,nf-codecommit@0.2.3,nf-console@1.2.1,nf-google@1.21.0,nf-k8s@1.0.0,nf-tower@1.11.3,nf-wave@1.12.1
-Jul-07 18:13:57.920 [main] INFO  o.pf4j.DefaultPluginStatusProvider - Enabled plugins: []
-Jul-07 18:13:57.921 [main] INFO  o.pf4j.DefaultPluginStatusProvider - Disabled plugins: []
-Jul-07 18:13:57.923 [main] INFO  org.pf4j.DefaultPluginManager - PF4J version 3.12.0 in 'deployment' mode
-Jul-07 18:13:57.930 [main] INFO  org.pf4j.AbstractPluginManager - No plugins
-Jul-07 18:13:57.946 [main] DEBUG nextflow.config.ConfigBuilder - Found config local: /home/phemarajata/Downloads/localpoppunk-final-fixed/nextflow.config
-Jul-07 18:13:57.948 [main] DEBUG nextflow.config.ConfigBuilder - Parsing config file: /home/phemarajata/Downloads/localpoppunk-final-fixed/nextflow.config
-Jul-07 18:13:57.966 [main] DEBUG n.secret.LocalSecretsProvider - Secrets store: /home/phemarajata/.nextflow/secrets/store.json
-Jul-07 18:13:57.969 [main] DEBUG nextflow.secret.SecretsLoader - Discovered secrets providers: [nextflow.secret.LocalSecretsProvider@c68a5f8] - activable => nextflow.secret.LocalSecretsProvider@c68a5f8
-Jul-07 18:13:57.978 [main] DEBUG nextflow.config.ConfigBuilder - Applying config profile: `large_dataset_optimized`
-Jul-07 18:13:58.449 [main] DEBUG nextflow.config.ConfigBuilder - Available config profiles: [bus_error_prevention, large_dataset_optimized, ultra_bus_error_prevention, local]
-Jul-07 18:13:58.478 [main] DEBUG nextflow.cli.CmdRun - Applied DSL=2 from script declaration
-Jul-07 18:13:58.492 [main] DEBUG nextflow.cli.CmdRun - Launching `poppunk_subsample_snp.nf` [amazing_archimedes] DSL2 - revision: b019fd7464
-Jul-07 18:13:58.493 [main] DEBUG nextflow.plugin.PluginsFacade - Plugins default=[]
-Jul-07 18:13:58.494 [main] DEBUG nextflow.plugin.PluginsFacade - Plugins resolved requirement=[]
-Jul-07 18:13:58.531 [main] DEBUG nextflow.Session - Session UUID: 299d8ad5-c032-41cb-b4f2-1b91156b41fa
-Jul-07 18:13:58.531 [main] DEBUG nextflow.Session - Run name: amazing_archimedes
-Jul-07 18:13:58.531 [main] DEBUG nextflow.Session - Executor pool size: 22
-Jul-07 18:13:58.536 [main] DEBUG nextflow.file.FilePorter - File porter settings maxRetries=3; maxTransfers=50; pollTimeout=null
-Jul-07 18:13:58.540 [main] DEBUG nextflow.util.ThreadPoolBuilder - Creating thread pool 'FileTransfer' minSize=10; maxSize=66; workQueue=LinkedBlockingQueue[-1]; allowCoreThreadTimeout=false
-Jul-07 18:13:58.554 [main] DEBUG nextflow.cli.CmdRun - 
-  Version: 25.04.4 build 5950
-  Created: 16-06-2025 14:23 UTC (21:23 ICST)
-  System: Linux 6.11.0-29-generic
-  Runtime: Groovy 4.0.26 on Java HotSpot(TM) 64-Bit Server VM 17.0.12+8-LTS-286
+Jul-08 13:05:09.225 [main] DEBUG nextflow.cli.Launcher - $> nextflow run poppunk_subsample_snp.nf -profile dgx_a100 --input /home/cdcadmin/Downloads/bp_contextual_samples/ --resultsDir /home/cdcadmin/Downloads/bp_contextual_samples/poppunk_results
+Jul-08 13:05:09.349 [main] DEBUG nextflow.cli.CmdRun - N E X T F L O W  ~  version 24.04.3
+Jul-08 13:05:09.367 [main] DEBUG nextflow.plugin.PluginsFacade - Setting up plugin manager > mode=prod; embedded=false; plugins-dir=/home/cdcadmin/.nextflow/plugins; core-plugins: nf-amazon@2.5.2,nf-azure@1.6.0,nf-cloudcache@0.4.1,nf-codecommit@0.2.0,nf-console@1.1.3,nf-ga4gh@1.3.0,nf-google@1.13.2-patch1,nf-tower@1.9.1,nf-wave@1.4.2
+Jul-08 13:05:09.377 [main] INFO  o.pf4j.DefaultPluginStatusProvider - Enabled plugins: []
+Jul-08 13:05:09.378 [main] INFO  o.pf4j.DefaultPluginStatusProvider - Disabled plugins: []
+Jul-08 13:05:09.381 [main] INFO  org.pf4j.DefaultPluginManager - PF4J version 3.10.0 in 'deployment' mode
+Jul-08 13:05:09.394 [main] INFO  org.pf4j.AbstractPluginManager - No plugins
+Jul-08 13:05:09.417 [main] DEBUG nextflow.config.ConfigBuilder - Found config local: /home/cdcadmin/localpoppunk-final-fixed/nextflow.config
+Jul-08 13:05:09.419 [main] DEBUG nextflow.config.ConfigBuilder - Parsing config file: /home/cdcadmin/localpoppunk-final-fixed/nextflow.config
+Jul-08 13:05:09.444 [main] DEBUG n.secret.LocalSecretsProvider - Secrets store: /home/cdcadmin/.nextflow/secrets/store.json
+Jul-08 13:05:09.448 [main] DEBUG nextflow.secret.SecretsLoader - Discovered secrets providers: [nextflow.secret.LocalSecretsProvider@267bbe1a] - activable => nextflow.secret.LocalSecretsProvider@267bbe1a
+Jul-08 13:05:09.460 [main] DEBUG nextflow.config.ConfigBuilder - Applying config profile: `dgx_a100`
+Jul-08 13:05:10.251 [main] DEBUG nextflow.config.ConfigBuilder - Available config profiles: [bus_error_prevention, large_dataset_optimized, ultra_bus_error_prevention, dgx_a100_conservative, dgx_a100, local]
+Jul-08 13:05:10.289 [main] DEBUG nextflow.cli.CmdRun - Applied DSL=2 from script declaration
+Jul-08 13:05:10.310 [main] DEBUG nextflow.cli.CmdRun - Launching `poppunk_subsample_snp.nf` [agitated_shirley] DSL2 - revision: a22e7c7bbf
+Jul-08 13:05:10.311 [main] WARN  nextflow.cli.CmdRun - Nextflow variables must be defined in the launching environment - The following variable set in the config file is going to be ignored: 'NXF_OPTS'
+Jul-08 13:05:10.313 [main] DEBUG nextflow.plugin.PluginsFacade - Plugins default=[]
+Jul-08 13:05:10.313 [main] DEBUG nextflow.plugin.PluginsFacade - Plugins resolved requirement=[]
+Jul-08 13:05:10.368 [main] DEBUG nextflow.Session - Session UUID: fafc1050-36a7-4f59-afb0-910425a52d0d
+Jul-08 13:05:10.368 [main] DEBUG nextflow.Session - Run name: agitated_shirley
+Jul-08 13:05:10.368 [main] DEBUG nextflow.Session - Executor pool size: 128
+Jul-08 13:05:10.376 [main] DEBUG nextflow.file.FilePorter - File porter settings maxRetries=3; maxTransfers=50; pollTimeout=null
+Jul-08 13:05:10.381 [main] DEBUG nextflow.util.ThreadPoolBuilder - Creating thread pool 'FileTransfer' minSize=10; maxSize=384; workQueue=LinkedBlockingQueue[10000]; allowCoreThreadTimeout=false
+Jul-08 13:05:10.399 [main] DEBUG nextflow.cli.CmdRun - 
+  Version: 24.04.3 build 5916
+  Created: 09-07-2024 19:35 UTC (10-07-2024 02:35 ICST)
+  System: Linux 5.15.0-143-generic
+  Runtime: Groovy 4.0.21 on OpenJDK 64-Bit Server VM 17.0.10+7
   Encoding: UTF-8 (UTF-8)
-  Process: 3945170@phemarajata-Stealth-16-MercedesAMG-A1VGG [127.0.1.1]
-  CPUs: 22 - Mem: 62.3 GB (1.6 GB) - Swap: 8 GB (7.3 GB)
-Jul-07 18:13:58.574 [main] DEBUG nextflow.Session - Work-dir: /home/phemarajata/Downloads/localpoppunk-final-fixed/work [ext2/ext3]
-Jul-07 18:13:58.574 [main] DEBUG nextflow.Session - Script base path does not exist or is not a directory: /home/phemarajata/Downloads/localpoppunk-final-fixed/bin
-Jul-07 18:13:58.580 [main] DEBUG nextflow.executor.ExecutorFactory - Extension executors providers=[]
-Jul-07 18:13:58.587 [main] DEBUG nextflow.Session - Observer factory: DefaultObserverFactory
-Jul-07 18:13:58.604 [main] DEBUG nextflow.Session - Observer factory (v2): LinObserverFactory
-Jul-07 18:13:58.623 [main] DEBUG nextflow.cache.CacheFactory - Using Nextflow cache factory: nextflow.cache.DefaultCacheFactory
-Jul-07 18:13:58.630 [main] DEBUG nextflow.util.CustomThreadPool - Creating default thread pool > poolSize: 23; maxThreads: 1000
-Jul-07 18:13:58.689 [main] DEBUG nextflow.Session - Session start
-Jul-07 18:13:58.887 [main] DEBUG nextflow.script.ScriptRunner - Parsed script files:
-Jul-07 18:13:58.898 [main] ERROR nextflow.cli.Launcher - Script compilation error
-- file : /home/phemarajata/Downloads/localpoppunk-final-fixed/poppunk_subsample_snp.nf
-- cause: token recognition error at: '(' @ line 745, column 70.
-   punk_db_refined_fit.pkl from $(basename 
-                                 ^
+  Process: 2749270@dgx-a100 [192.168.1.11]
+  CPUs: 128 - Mem: 503.7 GB (145.4 GB) - Swap: 0 (0)
+Jul-08 13:05:10.421 [main] DEBUG nextflow.Session - Work-dir: /home/cdcadmin/localpoppunk-final-fixed/work [ext2/ext3]
+Jul-08 13:05:10.421 [main] DEBUG nextflow.Session - Script base path does not exist or is not a directory: /home/cdcadmin/localpoppunk-final-fixed/bin
+Jul-08 13:05:10.430 [main] DEBUG nextflow.executor.ExecutorFactory - Extension executors providers=[]
+Jul-08 13:05:10.438 [main] DEBUG nextflow.Session - Observer factory: DefaultObserverFactory
+Jul-08 13:05:10.501 [main] DEBUG nextflow.cache.CacheFactory - Using Nextflow cache factory: nextflow.cache.DefaultCacheFactory
+Jul-08 13:05:10.510 [main] DEBUG nextflow.util.CustomThreadPool - Creating default thread pool > poolSize: 129; maxThreads: 1000
+Jul-08 13:05:10.560 [main] DEBUG nextflow.Session - Session start
+Jul-08 13:05:10.563 [main] DEBUG nextflow.trace.TraceFileObserver - Workflow started -- trace file: /home/cdcadmin/Downloads/bp_contextual_samples/poppunk_results/reports/dgx_a100_trace.txt
+Jul-08 13:05:11.413 [main] DEBUG nextflow.script.ScriptRunner - > Launching execution
+Jul-08 13:05:11.421 [main] INFO  nextflow.script.BaseScript - ▶ FASTA input directory:  /home/cdcadmin/Downloads/bp_contextual_samples/
+Jul-08 13:05:11.422 [main] INFO  nextflow.script.BaseScript - ▶ Results directory:      /home/cdcadmin/Downloads/bp_contextual_samples/poppunk_results
+Jul-08 13:05:11.423 [main] INFO  nextflow.script.BaseScript - ▶ Threads / RAM:          96  /  400 GB
+Jul-08 13:05:11.561 [main] DEBUG nextflow.script.ProcessConfig - Config settings `withName:VALIDATE_FASTA` matches process VALIDATE_FASTA
+Jul-08 13:05:11.570 [main] DEBUG nextflow.executor.ExecutorFactory - << taskConfig executor: local
+Jul-08 13:05:11.571 [main] DEBUG nextflow.executor.ExecutorFactory - >> processorType: 'local'
+Jul-08 13:05:11.576 [main] DEBUG nextflow.executor.Executor - [warm up] executor > local
+Jul-08 13:05:11.582 [main] DEBUG n.processor.LocalPollingMonitor - Creating local task monitor for executor 'local' > cpus=128; memory=503.7 GB; capacity=128; pollInterval=100ms; dumpInterval=5m
+Jul-08 13:05:11.584 [main] DEBUG n.processor.TaskPollingMonitor - >>> barrier register (monitor: local)
+Jul-08 13:05:11.668 [main] INFO  nextflow.script.BaseScript - 🔄 Using SUBSAMPLING mode - performing MASH-based intelligent subsampling
+Jul-08 13:05:11.674 [main] DEBUG nextflow.script.ProcessConfig - Config settings `withName:MASH_SKETCH` matches process MASH_SKETCH
+Jul-08 13:05:11.676 [main] DEBUG nextflow.executor.ExecutorFactory - << taskConfig executor: local
+Jul-08 13:05:11.676 [main] DEBUG nextflow.executor.ExecutorFactory - >> processorType: 'local'
+Jul-08 13:05:11.683 [main] DEBUG nextflow.script.ProcessConfig - Config settings `withName:MASH_DIST` matches process MASH_DIST
+Jul-08 13:05:11.684 [main] DEBUG nextflow.executor.ExecutorFactory - << taskConfig executor: local
+Jul-08 13:05:11.685 [main] DEBUG nextflow.executor.ExecutorFactory - >> processorType: 'local'
+Jul-08 13:05:11.691 [main] DEBUG nextflow.executor.ExecutorFactory - << taskConfig executor: local
+Jul-08 13:05:11.692 [main] DEBUG nextflow.executor.ExecutorFactory - >> processorType: 'local'
+Jul-08 13:05:11.699 [main] DEBUG nextflow.script.ProcessConfig - Config settings `withName:POPPUNK_MODEL` matches process POPPUNK_MODEL
+Jul-08 13:05:11.700 [main] DEBUG nextflow.executor.ExecutorFactory - << taskConfig executor: local
+Jul-08 13:05:11.700 [main] DEBUG nextflow.executor.ExecutorFactory - >> processorType: 'local'
+Jul-08 13:05:11.708 [main] DEBUG nextflow.script.ProcessConfig - Config settings `withName:POPPUNK_REFINE` matches process POPPUNK_REFINE
+Jul-08 13:05:11.709 [main] DEBUG nextflow.executor.ExecutorFactory - << taskConfig executor: local
+Jul-08 13:05:11.709 [main] DEBUG nextflow.executor.ExecutorFactory - >> processorType: 'local'
+Jul-08 13:05:11.715 [main] DEBUG nextflow.executor.ExecutorFactory - << taskConfig executor: local
+Jul-08 13:05:11.716 [main] DEBUG nextflow.executor.ExecutorFactory - >> processorType: 'local'
+Jul-08 13:05:11.722 [main] DEBUG nextflow.executor.ExecutorFactory - << taskConfig executor: local
+Jul-08 13:05:11.722 [main] DEBUG nextflow.executor.ExecutorFactory - >> processorType: 'local'
+Jul-08 13:05:11.741 [main] DEBUG nextflow.script.ProcessConfig - Config settings `withName:POPPUNK_ASSIGN_CHUNK` matches process POPPUNK_ASSIGN_CHUNK
+Jul-08 13:05:11.743 [main] DEBUG nextflow.executor.ExecutorFactory - << taskConfig executor: local
+Jul-08 13:05:11.744 [main] DEBUG nextflow.executor.ExecutorFactory - >> processorType: 'local'
+Jul-08 13:05:11.751 [main] DEBUG nextflow.script.ProcessConfig - Config settings `withName:MERGE_CHUNK_RESULTS` matches process MERGE_CHUNK_RESULTS
+Jul-08 13:05:11.753 [main] DEBUG nextflow.executor.ExecutorFactory - << taskConfig executor: local
+Jul-08 13:05:11.753 [main] DEBUG nextflow.executor.ExecutorFactory - >> processorType: 'local'
+Jul-08 13:05:11.761 [main] DEBUG nextflow.script.ProcessConfig - Config settings `withName:SUMMARY_REPORT` matches process SUMMARY_REPORT
+Jul-08 13:05:11.762 [main] DEBUG nextflow.executor.ExecutorFactory - << taskConfig executor: local
+Jul-08 13:05:11.762 [main] DEBUG nextflow.executor.ExecutorFactory - >> processorType: 'local'
+Jul-08 13:05:11.768 [main] DEBUG nextflow.executor.ExecutorFactory - << taskConfig executor: local
+Jul-08 13:05:11.768 [main] DEBUG nextflow.executor.ExecutorFactory - >> processorType: 'local'
+Jul-08 13:05:11.774 [main] DEBUG nextflow.Session - Workflow process names [dsl2]: BIN_SUBSAMPLE_OR_ALL, POPPUNK_REFINE, FILTER_ASSIGNMENT_SAMPLES, MASH_DIST, MASH_SKETCH, SUMMARY_REPORT, POPPUNK_MODEL, CHUNK_SAMPLES, MERGE_CHUNK_RESULTS, POPPUNK_ASSIGN_CHUNK, VALIDATE_FASTA, COPY_FINAL_RESULTS
+Jul-08 13:05:11.785 [main] WARN  nextflow.Session - There's no process matching config selector: BIN_SUBSAMPLE
+Jul-08 13:05:11.789 [main] DEBUG nextflow.Session - Igniting dataflow network (13)
+Jul-08 13:05:11.795 [main] DEBUG nextflow.processor.TaskProcessor - Starting process > VALIDATE_FASTA
+Jul-08 13:05:11.795 [main] DEBUG nextflow.processor.TaskProcessor - Starting process > MASH_SKETCH
+Jul-08 13:05:11.795 [main] DEBUG nextflow.processor.TaskProcessor - Starting process > MASH_DIST
+Jul-08 13:05:11.796 [main] DEBUG nextflow.processor.TaskProcessor - Starting process > BIN_SUBSAMPLE_OR_ALL
+Jul-08 13:05:11.796 [main] DEBUG nextflow.processor.TaskProcessor - Starting process > POPPUNK_MODEL
+Jul-08 13:05:11.796 [main] DEBUG nextflow.processor.TaskProcessor - Starting process > POPPUNK_REFINE
+Jul-08 13:05:11.796 [main] DEBUG nextflow.processor.TaskProcessor - Starting process > FILTER_ASSIGNMENT_SAMPLES
+Jul-08 13:05:11.797 [main] DEBUG nextflow.processor.TaskProcessor - Starting process > CHUNK_SAMPLES
+Jul-08 13:05:11.797 [main] DEBUG nextflow.processor.TaskProcessor - Starting process > POPPUNK_ASSIGN_CHUNK
+Jul-08 13:05:11.797 [PathVisitor-1] DEBUG nextflow.file.PathVisitor - files for syntax: glob; folder: /home/cdcadmin/Downloads/bp_contextual_samples/; pattern: *.fasta; options: [checkIfExists:true]
+Jul-08 13:05:11.797 [main] DEBUG nextflow.processor.TaskProcessor - Starting process > MERGE_CHUNK_RESULTS
+Jul-08 13:05:11.797 [main] DEBUG nextflow.processor.TaskProcessor - Starting process > SUMMARY_REPORT
+Jul-08 13:05:11.798 [main] DEBUG nextflow.processor.TaskProcessor - Starting process > COPY_FINAL_RESULTS
+Jul-08 13:05:11.798 [main] DEBUG nextflow.script.ScriptRunner - Parsed script files:
+  Script_d3321fd9f4b446fc: /home/cdcadmin/localpoppunk-final-fixed/poppunk_subsample_snp.nf
+Jul-08 13:05:11.798 [main] DEBUG nextflow.script.ScriptRunner - > Awaiting termination 
+Jul-08 13:05:11.798 [main] DEBUG nextflow.Session - Session await
+Jul-08 13:05:12.103 [Task submitter] DEBUG n.executor.local.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+Jul-08 13:05:12.105 [Task submitter] INFO  nextflow.Session - [0d/01071a] Submitted process > VALIDATE_FASTA (validate_fasta)
+Jul-08 13:05:38.227 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 1; name: VALIDATE_FASTA (validate_fasta); status: COMPLETED; exit: 0; error: -; workDir: /home/cdcadmin/localpoppunk-final-fixed/work/0d/01071ac960eec8a4f2159558868523]
+Jul-08 13:05:38.228 [Task monitor] DEBUG nextflow.util.ThreadPoolBuilder - Creating thread pool 'TaskFinalizer' minSize=10; maxSize=384; workQueue=LinkedBlockingQueue[10000]; allowCoreThreadTimeout=false
+Jul-08 13:05:38.245 [Actor Thread 125] INFO  nextflow.script.BaseScript - 
+==================================================
+Jul-08 13:05:38.245 [Actor Thread 125] INFO  nextflow.script.BaseScript - 📋 FASTA VALIDATION REPORT
+Jul-08 13:05:38.246 [Actor Thread 125] INFO  nextflow.script.BaseScript - ==================================================
+Jul-08 13:05:38.247 [Actor Thread 125] INFO  nextflow.script.BaseScript - FASTA Validation Report
+======================
+Total files processed: 451
+Valid files: 451
+Invalid files: 0
 
-1 error
+Valid files (with absolute paths):
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/GCA_963563065.1.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/IP-0020-8_S11_L001-SPAdes.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/IP-0075-2_S9_L001-SPAdes.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/ERS008803.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/IE-0018_S12_L001-SPAdes.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/GCA_963571055.1.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/GCA_963566085.1.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/IP-0028-1_S8_L001-SPAdes.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/GCA_963563305.1.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/GCA_900595585.2.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/GCA_963561895.1.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/GCA_963567935.1.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/IE-0017_S11_L001-SPAdes.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/IP-0073-7_S7_L001-SPAdes.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/ERS008786.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/IP-0021-6_S1_L001-SPAdes.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/GCA_963566625.1.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/IP-0096-8_S8_L001-SPAdes.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/IP-0074-5_S8_L001-SPAdes.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/ERS008837.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/GCA_963564325.1.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/GCA_900598305.2.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/ERS012303.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/IP-0039-8_S9_L001-SPAdes.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/IP-0109-9_S9_L001-SPAdes.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/ERS013354.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/GCA_963570575.1.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/ERS008822.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/ERS012347.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/ERS008794.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/IP-0045-5_S5_L001-SPAdes.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/ERS012370.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/ERS012354.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/ERS008816.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/IP-0048-9_S8_L001-SPAdes.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/IP-0036-4_S6_L001-SPAdes.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/IP-0163-6_S2-SPAdes.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/IP-0167-7_S2-SPAdes.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/IP-0009-1_S9_L001-SPAdes.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/Burkholderia_pseudomallei_619s008_GCF_001326955.2_Malaysia.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/IP-0002-6_S2_L001-SPAdes.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/GCA_963565125.1.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/Burkholderia_pseudomallei_ABCPW_30_GCF_000774495.1_Australia.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/ERS012328.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/GCA_963565675.1.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/GCA_963566765.1.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/Burkholderia_pseudomallei_7400_GCF_025848135.1_Viet_Nam.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/IP-0184-2_S9-SPAdes.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/GCA_963565395.1.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/IP-0191-7_S6-SPAdes.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/ERS012380.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/IP-0108-1_S8_L001-SPAdes.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/IP-0005-9_S5_L001-SPAdes.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/IP-0044-8_S4_L001-SPAdes.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/IP-0172-7_S7-SPAdes.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/IP-0114-9_S5_L001-SPAdes.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/ERS012377.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/GCA_963563155.1.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/IP-0102-4_S2_L001-SPAdes.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/IP-0003-4_S3_L001-SPAdes.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/IE-0026_S8-SPAdes.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/GCA_963561435.1.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/IE-0019_S5-SPAdes.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/GCA_900597175.2.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/GCA_963561075.1.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/ERS008841.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/IP-0050-5_S10_L001-SPAdes.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/GCA_963562655.1.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/ERS012317.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/IP-0014-1_S5_L001-SPAdes.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/IP-0094-3_S6_L001-SPAdes.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/IP-0183-4_S8-SPAdes.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/GCA_963571495.1.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/IP-0157-8_S7_L001-SPAdes.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/ERS013365.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/IP-0166-9_S1-SPAdes.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/IP-0053-9_S3_L001-SPAdes.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/Burkholderia_pseudomallei_619s005_GCF_001207785.2_Malaysia.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/IP-0071-1_S5_L001-SPAdes.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/IP-0043-0_S3_L001-SPAdes.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/Burkholderia_pseudomallei_406e_GCF_000410895.1_Thailand.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/Burkholderia_pseudomallei_ABCPW_91_GCF_000774405.1_Australia.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/ERS012308.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/IP-0098-4_S10_L001-SPAdes.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/IP-0056-2_S1_L001-SPAdes.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/IP-0068-7_S2_L001-SPAdes.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/IP-0113-1_S4_L001-SPAdes.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/ERS008804.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/IP-0132-1_S2_L001-SPAdes.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/Burkholderia_pseudomallei_8400_GCF_025847635.1_Viet_Nam.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/GCA_963563475.1.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/GCA_963570085.1.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/IE-0010_S4_L001-SPAdes.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/IP-0016-6_S7_L001-SPAdes.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/Burkholderia_pseudomallei_44W_S64_GCF_014713025.1_Laos.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/ERS008819.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/ERS012334.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/IP-0082-8_S5_L001-SPAdes.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/IP-0019-0_S10_L001-SPAdes.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/GCA_963568885.1.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/ERS012330.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/IP-0112-3_S3_L001-SPAdes.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/IP-0084-4_S7_L001-SPAdes.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/IP-0162-8_S1-SPAdes.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/IE-0012_S6_L001-SPAdes.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/IP-0138-8_S8_L001-SPAdes.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/ERS008829.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/ERS013348.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/IP-0086-9_S9_L001-SPAdes.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/ERS012351.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/IE-0004_S9_L001-SPAdes.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/IP-0087-7_S10_L001-SPAdes.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/IP-0177-6_S2-SPAdes.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/Burkholderia_pseudomallei_28P_GCF_025847415.1_Viet_Nam.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/IP-0182-6_S7-SPAdes.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/Burkholderia_pseudomallei_402a_GCF_001980775.1_Thailand.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/IE-0015_S9_L001-SPAdes.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/ERS012314.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/IP-0135-4_S5_L001-SPAdes.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/GCA_963566855.1.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/IP-0119-8_S10_L001-SPAdes.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/Burkholderia_pseudomallei_619s007_GCF_001326935.2_Malaysia.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/IP-0178-4_S3-SPAdes.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/IP-0067-9_S1_L001-SPAdes.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/IP-0100-8_S1_L001-SPAdes.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/GCA_963568785.1.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/IP-0155-2_S5_L001-SPAdes.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/IP-0061-2_S6_L001-SPAdes.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/GCA_963561835.1.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/IP-0165-1_S4-SPAdes.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/IP-0103-2_S3_L001-SPAdes.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/IP-0120-6_S11_L001-SPAdes.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/IP-0179-2_S4-SPAdes.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/GCA_963566635.1.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/Burkholderia_pseudomallei_2002734728_GCF_002111105.1_USA_California.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/GCA_963569795.1.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/GCA_963560915.1.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/ERS013345.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/IE-0016_S10_L001-SPAdes.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/IP-0164-4_S3-SPAdes.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/IP-0097-6_S9_L001-SPAdes.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/IP-0181-8_S6-SPAdes.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/IP-0055-4_S5_L001-SPAdes.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/GCA_963569365.1.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/IP-0022-4_S2_L001-SPAdes.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/ERS008820.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/GCA_963565345.1.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/IE-0013_S7_L001-SPAdes.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/IP-0069-5_S3_L001-SPAdes.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/IP-0197-4_S2-SPAdes.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/IP-0010-9_S10_L001-SPAdes.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/IP-0170-1_S5-SPAdes.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/Burkholderia_pseudomallei_64W_S75_GCF_014712815.1_Laos.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/IP-0121-4_S1_L001-SPAdes.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/Burkholderia_pseudomallei_577ci_GCF_001980815.1_Thailand.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/IP-0176-8_S1-SPAdes.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/IP-0185-9_S10-SPAdes.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/IP-0145-3_S5_L001-SPAdes.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/ERS008813.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/ERS008838.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/ERS012331.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/IP-0072-9_S6_L001-SPAdes.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/IE-0003_S8_L001-SPAdes.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/IP-0093-5_S5_L001-SPAdes.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/GCA_963562795.1.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/IP-0161-0_S11_L001-SPAdes.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/Burkholderia_pseudomallei_BDD_GCF_000756905.1_Australia_Townsville_Queensland.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/ERS008824.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/IP-0029-9_S9_L001-SPAdes.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/IP-0024-0_S4_L001-SPAdes.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/Burkholderia_pseudomallei_43S_S63_GCF_014713085.1_Laos.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/ERS013363.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/GCA_963569685.1.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/IP-0149-5_S9_L001-SPAdes.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/IP-0076-0_S10_L001-SPAdes.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/ERS008828.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/GCA_963566675.1.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/GCA_963560945.1.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/ERS008784.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/IP-0105-7_S5_L001-SPAdes.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/IP-0130-5_S10_L001-SPAdes.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/IP-0026-5_S6_L001-SPAdes.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/Burkholderia_pseudomallei_4811_GCF_003268075.1_Viet_Nam.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/IP-0122-2_S2_L001-SPAdes.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/IP-0038-0_S8_L001-SPAdes.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/GCA_963561215.1.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/ERS012324.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/GCA_963571905.1.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/IE-0001_S6_L001-SPAdes.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/GCA_963568705.1.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/IP-0007-5_S7_L001-SPAdes.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/IP-0062-0_S7_L001-SPAdes.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/GCA_963573225.1.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/GCA_963562325.1.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/ERS008781.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/GCA_900596305.2.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/GCA_963561765.1.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/Burkholderia_pseudomallei_576_GCF_000182195.1_Thailand.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/IP-0175-0_S10-SPAdes.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/IP-0171-9-R_S12-SPAdes.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/GCA_963570025.1.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/IP-0047-1_S7_L001-SPAdes.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/GCA_963569645.1.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/IP-0158-6_S8_L001-SPAdes.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/ERS012306.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/IP-0147-9_S7_L001-SPAdes.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/Burkholderia_pseudomallei_4822_GCF_009826725.1_Viet_Nam.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/IP-0140-4_S10_L001-SPAdes.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/ERS013346.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/IP-0013-3_S4_L001-SPAdes.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/IP-0070-3_S4_L001-SPAdes.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/IP-0004-2_S4_L001-SPAdes.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/ERS012359.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/IP-0063-8_S8_L001-SPAdes.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/GCA_963561245.1.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/IP-0141-2_S1_L001-SPAdes.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/GCA_963571845.1.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/IP-0058-8_S3_L001-SPAdes.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/Burkholderia_pseudomallei_53W_S72_GCF_014712895.1_Laos.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/IP-0117-2_S8_L001-SPAdes.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/Burkholderia_pseudomallei_284_GCF_025847905.1_Viet_Nam.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/IP-0146-1_S6_L001-SPAdes.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/GCA_963570975.1.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/IP-0187-5_S2-SPAdes.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/IP-0111-5_S2_L001-SPAdes.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/GCA_963561355.1.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/GCA_963569785.1.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/IE-0021_S7-SPAdes.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/IP-0064-6_S9_L001-SPAdes.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/IP-0006-7_S6_L001-SPAdes.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/IP-0151-1_S1_L001-SPAdes.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/IP-0124-8_S4_L001-SPAdes.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/Burkholderia_pseudomallei_ABCPW_107_GCF_000773235.1_Australia.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/IP-0092-7_S4_L001-SPAdes.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/IP-0201-4_S6-SPAdes.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/ERS012363.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/IP-0017-4_S8_L001-SPAdes.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/IE-0007_S1_L001-SPAdes.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/GCA_963566495.1.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/IP-0023-2_S3_L001-SPAdes.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/ERS008817.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/IP-0025-7_S5_L001-SPAdes.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/Burkholderia_pseudomallei_58W_S73_GCF_014712875.1_Laos.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/GCA_963562615.1.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/IP-0131-3_S1_L001-SPAdes.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/IP-0160-2_S10_L001-SPAdes.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/IP-0199-0_S4-SPAdes.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/IP-0033-1_S3_L001-SPAdes.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/GCA_963569705.1.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/ERS008785.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/ERS012316.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/IP-0012-5_S3_L001-SPAdes.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/IP-0001-8_S1_L001-SPAdes.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/IP-0200-6_S5-SPAdes.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/ERS013364.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/IP-0193-3_S8-SPAdes.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/IP-0079-4_S2_L001-SPAdes.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/GCA_963562695.1.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/IP-0189-1_S4-SPAdes.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/ERS012332.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/IP-0090-1_S2_L001-SPAdes.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/ERS013343.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/GCA_963561975.1.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/IP-0089-3_S1_L001-SPAdes.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/IP-0133-9_S3_L001-SPAdes.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/IP-0091-9_S3_L001-SPAdes.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/GCA_963564785.1.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/IP-0173-5_S8-SPAdes.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/IP-0057-0_S2_L001-SPAdes.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/ERS008790.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/IP-0027-3_S7_L001-SPAdes.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/IP-0088-5_S11_L001-SPAdes.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/IP-0153-7_S3_L001-SPAdes.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/IE-0009_S3_L001-SPAdes.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/GCA_963571475.1.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/GCA_963561855.1.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/IP-0030-7_S10_L001-SPAdes.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/GCA_963573175.1.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/IP-0137-0_S7_L001-SPAdes.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/IP-0136-2_S6_L001-SPAdes.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/ERS012365.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/GCA_963568005.1.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/Burkholderia_pseudomallei_134_GCF_009830095.1_Thailand.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/IP-0127-1_S7_L001-SPAdes.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/ERS013352.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/ERS012307.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/GCA_963572755.1.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/ERS012362.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/IP-0095-0_S7_L001-SPAdes.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/IP-0051-3_S1_L001-SPAdes.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/IP-0195-8_S10-SPAdes.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/GCA_963564305.1.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/GCA_963560675.1.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/IP-0143-8_S3_L001-SPAdes.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/IP-0042-2_S2_L001-SPAdes.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/ERS008833.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/GCA_963564375.1.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/IP-0011-7_S2_L001-SPAdes.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/Burkholderia_pseudomallei_40S_S61_GCF_014713055.1_Laos.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/IP-0015-8_S6_L001-SPAdes.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/IP-0115-6_S6_L001-SPAdes.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/GCA_963573025.1.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/Burkholderia_pseudomallei_43W_S62_GCF_014713065.1_Laos.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/GCA_963562235.1.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/ERS012358.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/GCA_963560585.1.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/GCA_963566475.1.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/IP-0037-2_S7_L001-SPAdes.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/IP-0188-3_S3-SPAdes.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/ERS012356.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/Burkholderia_pseudomallei_316a_GCF_001980725.1_Thailand.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/ERS008809.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/ERS012340.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/IP-0099-2_S11_L001-SPAdes.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/IP-0110-7_S10_L001-SPAdes.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/GCA_963566695.1.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/GCA_963565485.1.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/ERS013360.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/IP-0134-7_S4_L001-SPAdes.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/Burkholderia_pseudomallei_60W_S74_GCF_014712825.1_Laos.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/ERS012312.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/Burkholderia_pseudomallei_45S_S65_GCF_014713015.1_Laos.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/GCA_963571975.1.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/IP-0154-5_S4_L001-SPAdes.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/GCA_963571745.1.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/GCA_963567115.1.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/ERS008792.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/IP-0080-2_S3_L001-SPAdes.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/Burkholderia_pseudomallei_ABCPW_1_GCF_000774965.1_Australia.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/IP-0202-2_S7-SPAdes.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/ERS012338.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/GCA_963570105.1.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/ERS013355.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/GCA_963565085.1.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/IP-0129-7_S9_L001-SPAdes.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/IP-0065-3_S10_L001-SPAdes.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/IP-0041-4_S1_L001-SPAdes.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/GCA_963565565.1.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/GCA_963568055.1.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/IP-0116-4_S7_L001-SPAdes.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/IP-0046-3_S6_L001-SPAdes.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/IP-0101-6_S1_L001-SPAdes.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/IP-0081-0_S4_L001-SPAdes.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/IP-0049-7_S9_L001-SPAdes.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/IP-0168-5_S3-SPAdes.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/ERS012313.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/IP-0150-3_S10_L001-SPAdes.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/IP-0123-0_S3_L001-SPAdes.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/IP-0152-9_S2_L001-SPAdes.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/GCA_963572995.1.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/GCA_963561925.1.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/ERS013353.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/IE-0005_S10_L001-SPAdes.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/Burkholderia_pseudomallei_50W_S69_GCF_014712935.1_Laos.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/GCA_963563715.1.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/GCA_963572615.1.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/ERS008798.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/IP-0139-6_S9_L001-SPAdes.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/IP-0196-6_S1-SPAdes.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/IP-0125-5_S5_L001-SPAdes.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/ERS012327.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/GCA_963566175.1.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/ERS012320.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/GCA_963573095.1.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/IE-0011_S5_L001-SPAdes.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/Burkholderia_pseudomallei_52W_S71_GCF_014712835.1_Laos.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/IP-0180-0_S5-SPAdes.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/IP-0159-4_S9_L001-SPAdes.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/IP-0148-7_S8_L001-SPAdes.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/ERS013342.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/ERS012376.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/IP-0118-0_S9_L001-SPAdes.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/GCA_963571365.1.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/Burkholderia_pseudomallei_47W_S67_GCF_014712955.1_Laos.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/GCA_963561735.1.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/IP-0060-4_S5_L001-SPAdes.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/ERS008844.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/GCA_963563635.1.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/GCA_963561565.1.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/Burkholderia_pseudomallei_49W_S68_GCF_014712965.1_Laos.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/IP-0156-0_S6_L001-SPAdes.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/Burkholderia_pseudomallei_619s006_GCF_001212705.2_Malaysia.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/IP-0107-3_S7_L001-SPAdes.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/Burkholderia_pseudomallei_91W_S76_GCF_014712775.1_Laos.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/IE-0014_S8_L001-SPAdes.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/ERS008821.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/IP-0052-1_S2_L001-SPAdes.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/IP-0078-6_S1_L001-SPAdes.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/GCA_963566455.1.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/IP-0008-3_S8_L001-SPAdes.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/Burkholderia_pseudomallei_2002721684_GCF_002110925.1_USA_Texas.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/ERS008835.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/GCA_963571005.1.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/Burkholderia_pseudomallei_4802_GCF_003268115.1_Viet_Nam.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/Burkholderia_pseudomallei_1701_GCF_003268105.1_Viet_Nam.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/GCA_963561915.1.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/Burkholderia_pseudomallei_46W_S66_GCF_014712945.1_Laos.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/IP-0018-2_S9_L001-SPAdes.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/IP-0035-6_S5_L001-SPAdes.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/IP-0186-7_S1-SPAdes.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/IP-0085-1_S8_L001-SPAdes.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/IP-0142-0_S2_L001-SPAdes.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/ERS008825.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/Burkholderia_pseudomallei_619s004_GCF_001212405.2_Malaysia.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/IE-0024_S10-SPAdes.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/IP-0034-9_S4_L001-SPAdes.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/Burkholderia_pseudomallei_316c_GCF_001980755.1_Thailand.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/IP-0169-3_S4-SPAdes.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/ERS012309.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/GCA_963569325.1.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/GCA_963560735.1.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/GCA_963565015.1.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/IP-0031-5_S1_L001-SPAdes.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/SRR12527885_contigs.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/IP-0083-6_S6_L001-SPAdes.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/IP-0144-6_S4_L001-SPAdes.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/Burkholderia_pseudomallei_51W_S70_GCF_014712915.1_Laos.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/IP-0066-1_S11_L001-SPAdes.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/IE-0022_S8-SPAdes.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/IP-0104-0_S4_L001-SPAdes.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/IP-0040-6_S10_L001-SPAdes.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/ERS008797.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/GCA_963563525.1.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/GCA_963562965.1.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/GCA_963567325.1.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/Burkholderia_pseudomallei_2010007509_GCF_002111145.1_USA_Arizona_ex_Costa_Rica.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/IP-0054-7_S4_L001-SPAdes.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/IP-0106-5_S6_L001-SPAdes.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/IP-0059-6_S4_L001-SPAdes.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/IE-0006_S11_L001-SPAdes.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/ERS008836.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/ERS013358.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/GCA_963573135.1.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/ERS008830.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/Burkholderia_pseudomallei_354e_GCF_000259795.1_Thailand.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/IP-0192-5_S7-SPAdes.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/Burkholderia_pseudomallei_134K_GCF_009830075.1_Thailand.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/IP-0032-3_S2_L001-SPAdes.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/IP-0128-9_S8_L001-SPAdes.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/IP-0077-8_S11_L001-SPAdes.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/IP-0126-3_S6_L001-SPAdes.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/IP-0190-9_S5-SPAdes.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/Burkholderia_pseudomallei_4702_GCF_009827035.1_Viet_Nam.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/IP-0174-3_S9-SPAdes.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/Burkholderia_pseudomallei_7801_GCF_025848015.1_Viet_Nam.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/GCA_963564975.1.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/Burkholderia_pseudomallei_354a_GCF_000259815.1_Thailand.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/Burkholderia_pseudomallei_2011756296_GCF_002110985.1_USA_Puerto_Rico.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/SRR12527871_contigs.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/ERS012369.fasta
+  ✓ /home/cdcadmin/Downloads/bp_contextual_samples/ERS008795.fasta
 
-nextflow.exception.ScriptCompilationException: Script compilation error
-- file : /home/phemarajata/Downloads/localpoppunk-final-fixed/poppunk_subsample_snp.nf
-- cause: token recognition error at: '(' @ line 745, column 70.
-   punk_db_refined_fit.pkl from $(basename 
-                                 ^
 
-1 error
+Jul-08 13:05:38.248 [Actor Thread 125] INFO  nextflow.script.BaseScript - ==================================================
 
-	at nextflow.script.parser.v1.ScriptLoaderV1.parse0(ScriptLoaderV1.groovy:204)
-	at nextflow.script.parser.v1.ScriptLoaderV1.parse(ScriptLoaderV1.groovy:215)
-	at nextflow.script.parser.v1.ScriptLoaderV1.parse(ScriptLoaderV1.groovy)
-	at nextflow.script.ScriptRunner.parseScript(ScriptRunner.groovy:232)
-	at nextflow.script.ScriptRunner.execute(ScriptRunner.groovy:137)
-	at nextflow.cli.CmdRun.run(CmdRun.groovy:379)
-	at nextflow.cli.Launcher.run(Launcher.groovy:513)
-	at nextflow.cli.Launcher.main(Launcher.groovy:673)
-Caused by: org.codehaus.groovy.control.MultipleCompilationErrorsException: startup failed:
-Script_1d22eced8cecc5e4: 745: token recognition error at: '(' @ line 745, column 70.
-   punk_db_refined_fit.pkl from $(basename 
-                                 ^
-
-1 error
-
-	at org.codehaus.groovy.control.ErrorCollector.failIfErrors(ErrorCollector.java:292)
-	at org.codehaus.groovy.control.ErrorCollector.addFatalError(ErrorCollector.java:148)
-	at org.apache.groovy.parser.antlr4.AstBuilder.collectSyntaxError(AstBuilder.java:4730)
-	at org.apache.groovy.parser.antlr4.AstBuilder.access$100(AstBuilder.java:169)
-	at org.apache.groovy.parser.antlr4.AstBuilder$3.syntaxError(AstBuilder.java:4741)
-	at groovyjarjarantlr4.v4.runtime.ProxyErrorListener.syntaxError(ProxyErrorListener.java:44)
-	at groovyjarjarantlr4.v4.runtime.Lexer.notifyListeners(Lexer.java:381)
-	at groovyjarjarantlr4.v4.runtime.Lexer.nextToken(Lexer.java:145)
-	at groovyjarjarantlr4.v4.runtime.BufferedTokenStream.fetch(BufferedTokenStream.java:170)
-	at groovyjarjarantlr4.v4.runtime.BufferedTokenStream.sync(BufferedTokenStream.java:153)
-	at groovyjarjarantlr4.v4.runtime.BufferedTokenStream.consume(BufferedTokenStream.java:137)
-	at groovyjarjarantlr4.v4.runtime.atn.ParserATNSimulator.execATN(ParserATNSimulator.java:854)
-	at groovyjarjarantlr4.v4.runtime.atn.ParserATNSimulator.execDFA(ParserATNSimulator.java:543)
-	at groovyjarjarantlr4.v4.runtime.atn.ParserATNSimulator.adaptivePredict(ParserATNSimulator.java:408)
-	at groovyjarjarantlr4.v4.runtime.atn.ParserATNSimulator.adaptivePredict(ParserATNSimulator.java:356)
-	at org.apache.groovy.parser.antlr4.GroovyParser.commandExpression(GroovyParser.java:9702)
-	at org.apache.groovy.parser.antlr4.GroovyParser.statementExpression(GroovyParser.java:8233)
-	at org.apache.groovy.parser.antlr4.GroovyParser.statement(GroovyParser.java:7078)
-	at org.apache.groovy.parser.antlr4.GroovyParser.scriptStatement(GroovyParser.java:517)
-	at org.apache.groovy.parser.antlr4.GroovyParser.scriptStatements(GroovyParser.java:427)
-	at org.apache.groovy.parser.antlr4.GroovyParser.compilationUnit(GroovyParser.java:363)
-	at org.apache.groovy.parser.antlr4.AstBuilder.buildCST(AstBuilder.java:243)
-	at org.apache.groovy.parser.antlr4.AstBuilder.buildCST(AstBuilder.java:221)
-	at org.apache.groovy.parser.antlr4.AstBuilder.buildAST(AstBuilder.java:262)
-	at org.apache.groovy.parser.antlr4.Antlr4ParserPlugin.buildAST(Antlr4ParserPlugin.java:58)
-	at org.codehaus.groovy.control.SourceUnit.buildAST(SourceUnit.java:256)
-	at java.base/java.util.Iterator.forEachRemaining(Iterator.java:133)
-	at java.base/java.util.Spliterators$IteratorSpliterator.forEachRemaining(Spliterators.java:1845)
-	at java.base/java.util.stream.ReferencePipeline$Head.forEach(ReferencePipeline.java:762)
-	at org.codehaus.groovy.control.CompilationUnit.compile(CompilationUnit.java:663)
-	at groovy.lang.GroovyClassLoader.doParseClass(GroovyClassLoader.java:365)
-	at groovy.lang.GroovyClassLoader.lambda$parseClass$2(GroovyClassLoader.java:314)
-	at org.codehaus.groovy.runtime.memoize.StampedCommonCache.compute(StampedCommonCache.java:163)
-	at org.codehaus.groovy.runtime.memoize.StampedCommonCache.getAndPut(StampedCommonCache.java:154)
-	at groovy.lang.GroovyClassLoader.parseClass(GroovyClassLoader.java:314)
-	at groovy.lang.GroovyShell.parseClass(GroovyShell.java:572)
-	at groovy.lang.GroovyShell.parse(GroovyShell.java:585)
-	at groovy.lang.GroovyShell.parse(GroovyShell.java:639)
-	at groovy.lang.GroovyShell.parse(GroovyShell.java:643)
-	at nextflow.script.parser.v1.ScriptLoaderV1.parse0(ScriptLoaderV1.groovy:183)
-	... 7 common frames omitted
+Jul-08 13:05:38.257 [TaskFinalizer-1] DEBUG nextflow.util.ThreadPoolBuilder - Creating thread pool 'PublishDir' minSize=10; maxSize=384; workQueue=LinkedBlockingQueue[10000]; allowCoreThreadTimeout=false
+Jul-08 13:05:38.427 [Task submitter] DEBUG n.executor.local.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+Jul-08 13:05:38.428 [Task submitter] INFO  nextflow.Session - [33/f278e3] Submitted process > MASH_SKETCH (mash_sketch)
+Jul-08 13:05:53.895 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 2; name: MASH_SKETCH (mash_sketch); status: COMPLETED; exit: 0; error: -; workDir: /home/cdcadmin/localpoppunk-final-fixed/work/33/f278e346d50fdd46601b4b5357dcc0]
+Jul-08 13:05:53.909 [Task submitter] DEBUG n.executor.local.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+Jul-08 13:05:53.909 [Task submitter] INFO  nextflow.Session - [22/cf0363] Submitted process > MASH_DIST (mash_dist)
+Jul-08 13:06:18.038 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 3; name: MASH_DIST (mash_dist); status: COMPLETED; exit: 0; error: -; workDir: /home/cdcadmin/localpoppunk-final-fixed/work/22/cf0363f6899295af0a6eebe8138160]
+Jul-08 13:06:18.069 [Task submitter] DEBUG n.executor.local.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+Jul-08 13:06:18.070 [Task submitter] INFO  nextflow.Session - [ed/c494df] Submitted process > BIN_SUBSAMPLE_OR_ALL (bin_subsample_or_all)
+Jul-08 13:06:22.482 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 4; name: BIN_SUBSAMPLE_OR_ALL (bin_subsample_or_all); status: COMPLETED; exit: 0; error: -; workDir: /home/cdcadmin/localpoppunk-final-fixed/work/ed/c494dfdc39bc946a80d861680080b3]
+Jul-08 13:06:22.562 [Task submitter] DEBUG n.executor.local.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+Jul-08 13:06:22.563 [Task submitter] INFO  nextflow.Session - [b4/f7757b] Submitted process > POPPUNK_MODEL (poppunk_model)
+Jul-08 13:07:00.086 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 5; name: POPPUNK_MODEL (poppunk_model); status: COMPLETED; exit: 0; error: -; workDir: /home/cdcadmin/localpoppunk-final-fixed/work/b4/f7757b2f3f3854ddedf76eca5359bd]
+Jul-08 13:07:00.108 [Task submitter] DEBUG n.executor.local.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+Jul-08 13:07:00.109 [Task submitter] INFO  nextflow.Session - [0e/99194f] Submitted process > FILTER_ASSIGNMENT_SAMPLES (filter_assignment_samples)
+Jul-08 13:07:00.118 [Task submitter] DEBUG n.executor.local.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+Jul-08 13:07:00.119 [Task submitter] INFO  nextflow.Session - [29/421d28] Submitted process > POPPUNK_REFINE (poppunk_refine)
+Jul-08 13:07:01.392 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 6; name: FILTER_ASSIGNMENT_SAMPLES (filter_assignment_samples); status: COMPLETED; exit: 0; error: -; workDir: /home/cdcadmin/localpoppunk-final-fixed/work/0e/99194f3baf8803eaca6928a904f78e]
+Jul-08 13:07:01.411 [Task submitter] DEBUG n.executor.local.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+Jul-08 13:07:01.412 [Task submitter] INFO  nextflow.Session - [1a/3a6e5e] Submitted process > CHUNK_SAMPLES (chunk_samples)
+Jul-08 13:07:02.146 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 8; name: CHUNK_SAMPLES (chunk_samples); status: COMPLETED; exit: 0; error: -; workDir: /home/cdcadmin/localpoppunk-final-fixed/work/1a/3a6e5eab0e40bbe026a33903ef3af0]
+Jul-08 13:07:05.007 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 7; name: POPPUNK_REFINE (poppunk_refine); status: COMPLETED; exit: 0; error: -; workDir: /home/cdcadmin/localpoppunk-final-fixed/work/29/421d2816e6232236ce1b8bc4c716a0]
+Jul-08 13:07:05.120 [Task submitter] DEBUG n.executor.local.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+Jul-08 13:07:05.121 [Task submitter] INFO  nextflow.Session - [5a/c81559] Submitted process > POPPUNK_ASSIGN_CHUNK (poppunk_assign_chunk_0)
+Jul-08 13:07:17.612 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 9; name: POPPUNK_ASSIGN_CHUNK (poppunk_assign_chunk_0); status: COMPLETED; exit: 0; error: -; workDir: /home/cdcadmin/localpoppunk-final-fixed/work/5a/c8155955d28f51f037088767e3cd77]
+Jul-08 13:07:17.631 [Task submitter] DEBUG n.executor.local.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+Jul-08 13:07:17.631 [Task submitter] INFO  nextflow.Session - [15/eb6cad] Submitted process > MERGE_CHUNK_RESULTS (merge_chunk_results)
+Jul-08 13:07:18.347 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 10; name: MERGE_CHUNK_RESULTS (merge_chunk_results); status: COMPLETED; exit: 0; error: -; workDir: /home/cdcadmin/localpoppunk-final-fixed/work/15/eb6cad426f9c40a20321348a08e31a]
+Jul-08 13:07:18.551 [Task submitter] DEBUG n.executor.local.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+Jul-08 13:07:18.551 [Task submitter] INFO  nextflow.Session - [ae/3fd14c] Submitted process > SUMMARY_REPORT (summary_report)
+Jul-08 13:07:32.042 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 11; name: SUMMARY_REPORT (summary_report); status: COMPLETED; exit: 0; error: -; workDir: /home/cdcadmin/localpoppunk-final-fixed/work/ae/3fd14c38d487cb1c68e9a252860b53]
+Jul-08 13:07:32.059 [Task submitter] DEBUG n.executor.local.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+Jul-08 13:07:32.059 [Task submitter] INFO  nextflow.Session - [9f/33833f] Submitted process > COPY_FINAL_RESULTS (copy_final_results)
+Jul-08 13:07:32.930 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 12; name: COPY_FINAL_RESULTS (copy_final_results); status: COMPLETED; exit: 0; error: -; workDir: /home/cdcadmin/localpoppunk-final-fixed/work/9f/33833feec3f25ec299c56888c50fe3]
+Jul-08 13:07:32.933 [main] DEBUG nextflow.Session - Session await > all processes finished
+Jul-08 13:07:33.031 [Task monitor] DEBUG n.processor.TaskPollingMonitor - <<< barrier arrives (monitor: local) - terminating tasks monitor poll loop
+Jul-08 13:07:33.031 [main] DEBUG nextflow.Session - Session await > all barriers passed
+Jul-08 13:07:33.035 [main] DEBUG nextflow.util.ThreadPoolManager - Thread pool 'TaskFinalizer' shutdown completed (hard=false)
+Jul-08 13:07:33.035 [main] DEBUG nextflow.util.ThreadPoolManager - Thread pool 'PublishDir' shutdown completed (hard=false)
+Jul-08 13:07:33.041 [main] DEBUG n.trace.WorkflowStatsObserver - Workflow completed > WorkflowStats[succeededCount=12; failedCount=0; ignoredCount=0; cachedCount=0; pendingCount=0; submittedCount=0; runningCount=0; retriesCount=0; abortedCount=0; succeedDuration=45m 16s; failedDuration=0ms; cachedDuration=0ms;loadCpus=0; loadMemory=0; peakRunning=2; peakCpus=32; peakMemory=128 GB; ]
+Jul-08 13:07:33.041 [main] DEBUG nextflow.trace.TraceFileObserver - Workflow completed -- saving trace file
+Jul-08 13:07:33.042 [main] DEBUG nextflow.trace.ReportObserver - Workflow completed -- rendering execution report
+Jul-08 13:07:33.628 [main] DEBUG nextflow.trace.TimelineObserver - Workflow completed -- rendering execution timeline
+Jul-08 13:07:33.725 [main] WARN  nextflow.dag.GraphvizRenderer - Graphviz is required to render the execution DAG in the given format -- See http://www.graphviz.org for more info.
+Jul-08 13:07:33.792 [main] DEBUG nextflow.cache.CacheDB - Closing CacheDB done
+Jul-08 13:07:33.805 [main] DEBUG nextflow.util.ThreadPoolManager - Thread pool 'FileTransfer' shutdown completed (hard=false)
+Jul-08 13:07:33.806 [main] DEBUG nextflow.script.ScriptRunner - > Execution complete -- Goodbye
